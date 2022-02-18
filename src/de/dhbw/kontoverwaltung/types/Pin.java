@@ -3,8 +3,12 @@ package de.dhbw.kontoverwaltung.types;
 public class Pin {
 
 	private String pin;
-	
-	private boolean checkPin(String pinToCheck) {
+
+	public Pin(String pin) {
+		this.pin = pin;
+	}
+
+	public boolean checkPin(String pinToCheck) {
 		return pin.equals(pinToCheck);
 	}
 
