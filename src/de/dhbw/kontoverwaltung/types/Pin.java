@@ -13,4 +13,8 @@ public class Pin {
 		return pin;
 	}
 
+	public boolean checkPin(String pinToCheck) {
+		return pin.equals(pinToCheck);
+	}
+
 }
