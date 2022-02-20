@@ -11,6 +11,14 @@ public abstract class Transaktion {
 	}
 
 	protected String transaktionId;
-	private Betrag betrag;
+	protected Betrag betrag;
+
+	public String getTransaktionId() {
+		return transaktionId;
+	}
+
+	public Betrag getBetrag() {
+		return betrag;
+	}
 
 }
