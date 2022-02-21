@@ -20,7 +20,8 @@ public class TerminalHandler {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 					String input = reader.readLine();
 					if (commandEvent != null) {
-						commandEvent.onInput(input);
+						CommandResult result = commandEvent.onInput(input);
+						printResult(result);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -28,6 +29,10 @@ public class TerminalHandler {
 			}
 		});
 		thread.start();
+	}
+
+	private void printResult(CommandResult result) {
+		System.out.println(result.toString());
 	}
 
 	public void stopThread() {

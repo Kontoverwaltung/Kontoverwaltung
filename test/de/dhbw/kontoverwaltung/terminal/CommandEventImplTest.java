@@ -37,7 +37,7 @@ class CommandEventImplTest {
 				assertThat(nachname, is("Abriss"));
 
 				assertsCalled = true;
-				return CommandResult.okay();
+				return CommandResult.success("created");
 			}
 		};
 
@@ -47,6 +47,7 @@ class CommandEventImplTest {
 		// assert
 		assertThat(assertsCalled, is(true));
 		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is("created"));
 	}
 
 	private CommandResult executeOnTarget(String command) {

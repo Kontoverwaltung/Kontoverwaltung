@@ -11,10 +11,6 @@ public class CommandResult {
 		this.additionalInfo = additionalInfo;
 	}
 
-	public static CommandResult of(boolean successful, String additionalInfo) {
-		return new CommandResult(successful, additionalInfo);
-	}
-
 	public static CommandResult success(String additionalInfo) {
 		return new CommandResult(true, additionalInfo);
 	}
@@ -31,8 +27,18 @@ public class CommandResult {
 		return additionalInfo;
 	}
 
-	public static CommandResult okay() {
-		return success("OK");
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		if (successful) {
+			stringBuilder.append("OK");
+		} else {
+			stringBuilder.append("ERROR");
+		}
+		stringBuilder.append(": ");
+		stringBuilder.append(additionalInfo);
+
+		return stringBuilder.toString();
 	}
 
 }
