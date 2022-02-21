@@ -1,13 +1,12 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
-import java.util.UUID;
-
 import de.dhbw.kontoverwaltung.types.Betrag;
+import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
 public abstract class Transaktion {
 
 	public Transaktion() {
-		transaktionId = UUID.randomUUID().toString();
+		transaktionId = UniqueIdGenerator.next();
 	}
 
 	protected String transaktionId;

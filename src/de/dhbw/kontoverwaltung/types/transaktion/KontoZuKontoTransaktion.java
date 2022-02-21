@@ -23,5 +23,4 @@ public class KontoZuKontoTransaktion extends Transaktion {
 		return empfaenger;
 	}
 
-
 }

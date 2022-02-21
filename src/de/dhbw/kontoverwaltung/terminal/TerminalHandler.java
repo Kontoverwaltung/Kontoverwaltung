@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class TerminalHandler {
 
-	private CommandEvent commandEvent;
+	private CommandListener commandEvent;
 	private Thread thread;
 
 	public TerminalHandler() {
@@ -34,7 +34,7 @@ public class TerminalHandler {
 		thread.interrupt();
 	}
 
-	public void setCommandEvent(CommandEvent commandEvent) {
+	public void setCommandEvent(CommandListener commandEvent) {
 		this.commandEvent = commandEvent;
 	}
 
