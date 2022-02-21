@@ -30,6 +30,7 @@ public class CommandResult {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
+
 		if (successful) {
 			stringBuilder.append("OK");
 		} else {

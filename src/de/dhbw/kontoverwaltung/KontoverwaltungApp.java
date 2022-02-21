@@ -17,7 +17,7 @@ public class KontoverwaltungApp {
 		KundeEventsImpl kundeEventsImpl = new KundeEventsImpl();
 
 		CommandParser commandParser = new CommandParser(kundeEventsImpl);
-		terminalHandler.setCommandEvent(commandParser);
+		terminalHandler.setCommandParser(commandParser);
 	}
 
 }

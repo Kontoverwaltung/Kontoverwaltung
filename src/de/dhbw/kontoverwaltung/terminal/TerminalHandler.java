@@ -39,7 +39,7 @@ public class TerminalHandler {
 		thread.interrupt();
 	}
 
-	public void setCommandEvent(CommandListener commandEvent) {
+	public void setCommandParser(CommandListener commandEvent) {
 		this.commandEvent = commandEvent;
 	}
 

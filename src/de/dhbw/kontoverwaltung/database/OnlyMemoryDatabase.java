@@ -7,12 +7,12 @@ public class OnlyMemoryDatabase<T> implements KeyValueDatabase<T> {
 	private HashMap<String, T> storage = new HashMap<String, T>();
 
 	@Override
-	public T getFromKey(String key) {
+	public T get(String key) {
 		return storage.get(key);
 	}
 
 	@Override
-	public void setWithKey(String key, T object) {
+	public void set(String key, T object) {
 		storage.put(key, object);
 	}
 

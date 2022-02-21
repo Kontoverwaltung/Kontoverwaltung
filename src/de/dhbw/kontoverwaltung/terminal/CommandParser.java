@@ -28,7 +28,6 @@ public class CommandParser implements CommandListener {
 					return kundeEvents.createNewKunde(bankName, vorname, nachname);
 				}
 			}
-
 		}
 
 		return CommandResult.error("command not found");
