@@ -4,7 +4,7 @@
 ```
 KUNDE CREATE {bankName} {vorname} {nachname}
 ```
-> OK created
+> OK created {kundenId}
 
 > ERROR bank not found
 
