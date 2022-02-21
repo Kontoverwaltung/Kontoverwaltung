@@ -1,6 +1,28 @@
 # Kontoverwaltung
 
-Möglicher Funktionsumfang:
+**Kunde erstellen**
+```
+KUNDE CREATE {bankName} {vorname} {nachname}
+```
+> OK created
+
+> ERROR bank not found
+
+---
+
+**Kunde löschen**
+```
+KUNDE DELETE {kundenId}
+```
+> OK deleted
+
+> ERROR kunde not found
+
+
+---
+
+
+Geplanter Funktionsumfang:
 
  - Unterschiedliche Konten verwalten
  - Konto anlegen/ändern/löschen
