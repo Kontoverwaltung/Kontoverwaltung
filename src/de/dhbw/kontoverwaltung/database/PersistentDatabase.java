@@ -11,8 +11,13 @@ import java.util.List;
 
 public class PersistentDatabase<T> implements KeyValueDatabase<T>  {
 
-	private final String DATABASEFILENAME = "database.csv";
+	private final String DATABASEFILENAME;
 	
+	public PersistentDatabase(String databaseFileName) {
+		super();
+		DATABASEFILENAME = databaseFileName;
+	}
+
 	@Override
 	public T get(String key) {
 		HashMap<String, T> records = new HashMap<String, T>();
@@ -38,4 +43,6 @@ public class PersistentDatabase<T> implements KeyValueDatabase<T>  {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
