@@ -32,13 +32,4 @@ public class CommandParser implements CommandListener {
 
 		return CommandResult.error("command not found");
 	}
-
-	public enum CommandGroup {
-		KUNDE, KONTO;
-	}
-
-	public enum CommandMethod {
-		CREATE;
-	}
-
 }
