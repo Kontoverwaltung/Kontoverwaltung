@@ -31,7 +31,7 @@ class PersistentDatabaseTest {
 	}
 
 	@Test
-	void testMultipleElement() {
+	void testMultipleElements() {
 		assertNull(target.get("key1"));
 		target.set("key1", new TestObject("obj1", 1));
 
