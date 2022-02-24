@@ -16,4 +16,9 @@ public class OnlyMemoryDatabase<T> implements KeyValueDatabase<T> {
 		storage.put(key, object);
 	}
 
+	@Override
+	public void remove(String key) {
+		storage.remove(key);
+	}
+
 }
