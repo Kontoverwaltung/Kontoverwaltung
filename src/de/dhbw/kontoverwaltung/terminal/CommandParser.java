@@ -1,35 +1,28 @@
 package de.dhbw.kontoverwaltung.terminal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
+import de.dhbw.kontoverwaltung.terminal.process.kunde.KundeProcessor;
+import de.dhbw.kontoverwaltung.util.Command;
 
 public class CommandParser implements CommandListener {
+	Map<String, Command> commandGroups = new HashMap<>();
 
-	private KundeEvents kundeEvents;
-
-	public CommandParser(KundeEvents kundeEvents) {
+	public CommandParser() {
 		super();
-		this.kundeEvents = kundeEvents;
+		commandGroups.put("KUNDE", new KundeProcessor());
 	}
 
 	@Override
 	public CommandResult onInput(String input) {
-		String[] split = input.split(" ");
+		String[] inputSplit = input.split(" ");
 
-		CommandGroup commandGroup = CommandGroup.valueOf(split[0].toUpperCase());
-
-		if (commandGroup == CommandGroup.KUNDE) {
-			CommandMethod commandMethod = CommandMethod.valueOf(split[1].toUpperCase());
-
-			if (commandMethod == CommandMethod.CREATE) {
-				if (split.length == 5) {
-					String bankName = split[2];
-					String vorname = split[3];
-					String nachname = split[4];
-					return kundeEvents.createNewKunde(bankName, vorname, nachname);
-				}
-			}
+		if (commandGroups.get(inputSplit[0].toUpperCase()) != null) {
+			return commandGroups.get(inputSplit[0].toUpperCase()).execute(inputSplit);
 		}
-
 		return CommandResult.error("command not found");
+
 	}
 }
