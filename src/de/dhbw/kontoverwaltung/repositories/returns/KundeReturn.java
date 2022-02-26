@@ -2,21 +2,15 @@ package de.dhbw.kontoverwaltung.repositories.returns;
 
 import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
-public class KundeReturn {
+public class KundeReturn extends Return {
+	private Kunde instance;
 	
-	private boolean successful;
-	private Kunde kunde;
-	
-	public KundeReturn(boolean successful, Kunde kunde) {
-		super();
-		this.successful = successful;
-		this.kunde = kunde;
+	public KundeReturn(boolean successful, Kunde instance) {
+		super(successful, instance);
 	}
-	
-	public boolean isSuccessful() {
-		return successful;
-	}
-	public Kunde getKunde() {
-		return kunde;
+
+	@Override
+	public Kunde getInstance() {
+		return instance;
 	}
 }
