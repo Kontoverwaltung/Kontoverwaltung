@@ -10,9 +10,9 @@ import de.dhbw.kontoverwaltung.util.Command;
 public class CommandParser implements CommandListener {
 	Map<String, Command> commandGroups = new HashMap<>();
 
-	public CommandParser() {
+	public CommandParser(KundeEvents kundeEvents) {
 		super();
-		commandGroups.put("KUNDE", new KundeProcessor());
+		commandGroups.put("KUNDE", new KundeProcessor(kundeEvents));
 	}
 
 	@Override

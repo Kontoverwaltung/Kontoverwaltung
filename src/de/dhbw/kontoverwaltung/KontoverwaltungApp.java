@@ -1,5 +1,6 @@
 package de.dhbw.kontoverwaltung;
 
+import de.dhbw.kontoverwaltung.events.kunde.KundeEventsImpl;
 import de.dhbw.kontoverwaltung.terminal.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.TerminalHandler;
 
@@ -13,7 +14,9 @@ public class KontoverwaltungApp {
 	private void start() {
 		TerminalHandler terminalHandler = new TerminalHandler();
 
-		CommandParser commandParser = new CommandParser();
+		KundeEventsImpl kundeEventsImpl = new KundeEventsImpl();
+		
+		CommandParser commandParser = new CommandParser(kundeEventsImpl);
 		terminalHandler.setCommandParser(commandParser);
 	}
 

@@ -3,15 +3,16 @@ package de.dhbw.kontoverwaltung.terminal.process.kunde;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
 import de.dhbw.kontoverwaltung.terminal.CommandResult;
 import de.dhbw.kontoverwaltung.util.Command;
 
 public class KundeProcessor implements Command {
 	private Map<String, Command> commands = new HashMap<>();
 	
-	public KundeProcessor() {
+	public KundeProcessor(KundeEvents kundeEvents) {
 		super();
-		commands.put("CREATE", new CreateKunde());
+		commands.put("CREATE", new CreateKunde(kundeEvents));
 		
 	}
 	

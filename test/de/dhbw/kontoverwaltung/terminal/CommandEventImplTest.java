@@ -75,7 +75,7 @@ class CommandEventImplTest {
 	}
 
 	private CommandParser createTarget() {
-		return new CommandParser();
+		return new CommandParser(kundeEvents);
 	}
 
 }

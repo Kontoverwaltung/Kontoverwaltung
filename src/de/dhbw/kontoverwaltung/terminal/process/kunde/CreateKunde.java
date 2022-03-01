@@ -1,11 +1,16 @@
 package de.dhbw.kontoverwaltung.terminal.process.kunde;
 
-import de.dhbw.kontoverwaltung.events.kunde.KundeEventsImpl;
+import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
 import de.dhbw.kontoverwaltung.terminal.CommandResult;
 import de.dhbw.kontoverwaltung.util.Command;
 
 public class CreateKunde implements Command {
-	KundeEventsImpl kundeEvents = new KundeEventsImpl();
+	KundeEvents kundeEvents;
+
+	public CreateKunde(KundeEvents kundeEvents) {
+		super();
+		this.kundeEvents = kundeEvents;
+	}
 
 	@Override
 	public CommandResult execute(String[] inputSplit) {
