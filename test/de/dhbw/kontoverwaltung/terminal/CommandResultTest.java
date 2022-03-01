@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+
 class CommandResultTest {
 
 	@Test
@@ -27,7 +29,7 @@ class CommandResultTest {
 	void testSuccessToString() {
 		CommandResult target = CommandResult.success("test ok");
 
-		assertThat(target.toString(), is("OK: test ok"));
+		assertThat(target.toString(), is("SUCCESS: test ok"));
 	}
 
 	@Test

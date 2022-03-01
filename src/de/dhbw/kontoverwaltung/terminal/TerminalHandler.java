@@ -4,23 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import de.dhbw.kontoverwaltung.terminal.command.CommandListener;
+import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+
 public class TerminalHandler {
 
-	private CommandListener commandEvent;
+	private CommandListener commandListener;
 	private Thread thread;
 
-	public TerminalHandler() {
-		startThread();
+	public TerminalHandler(CommandListener commandListener) {
+		this.commandListener = commandListener;
 	}
 
-	private void startThread() {
+	public void start() {
 		thread = new Thread(() -> {
 			while (!Thread.interrupted()) {
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 					String input = reader.readLine();
-					if (commandEvent != null) {
-						CommandResult result = commandEvent.onInput(input);
+					if (commandListener != null) {
+						CommandResult result = commandListener.onInput(input);
 						printResult(result);
 					}
 				} catch (IOException e) {
@@ -37,10 +40,6 @@ public class TerminalHandler {
 
 	public void stopThread() {
 		thread.interrupt();
-	}
-
-	public void setCommandParser(CommandListener commandEvent) {
-		this.commandEvent = commandEvent;
 	}
 
 }

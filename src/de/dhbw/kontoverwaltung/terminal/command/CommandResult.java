@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal;
+package de.dhbw.kontoverwaltung.terminal.command;
 
 public class CommandResult {
 
@@ -19,6 +19,14 @@ public class CommandResult {
 		return new CommandResult(false, additionalInfo);
 	}
 
+	public static CommandResult commandNotFound() {
+		return notFound("command");
+	}
+
+	public static CommandResult notFound(String name) {
+		return error(name + " not found");
+	}
+
 	public boolean isSuccessful() {
 		return successful;
 	}
@@ -32,7 +40,7 @@ public class CommandResult {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if (successful) {
-			stringBuilder.append("OK");
+			stringBuilder.append("SUCCESS");
 		} else {
 			stringBuilder.append("ERROR");
 		}

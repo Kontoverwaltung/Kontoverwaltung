@@ -1,11 +1,12 @@
 package de.dhbw.kontoverwaltung.terminal.process.kunde;
 
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
-import de.dhbw.kontoverwaltung.terminal.CommandResult;
-import de.dhbw.kontoverwaltung.util.Command;
+import de.dhbw.kontoverwaltung.terminal.command.Command;
+import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 
 public class CreateKunde implements Command {
-	KundeEvents kundeEvents;
+	
+	private KundeEvents kundeEvents;
 
 	public CreateKunde(KundeEvents kundeEvents) {
 		super();
@@ -20,6 +21,6 @@ public class CreateKunde implements Command {
 			String nachname = inputSplit[4];
 			return kundeEvents.createNewKunde(bankName, vorname, nachname);
 		}
-		return CommandResult.error("command not found");
+		return CommandResult.commandNotFound();
 	}
 }

@@ -2,7 +2,7 @@ package de.dhbw.kontoverwaltung.events.kunde;
 
 import de.dhbw.kontoverwaltung.repositories.KundeRepo;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
-import de.dhbw.kontoverwaltung.terminal.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 import de.dhbw.kontoverwaltung.types.Bank;
 
 public class KundeEventsImpl implements KundeEvents {
@@ -33,8 +33,7 @@ public class KundeEventsImpl implements KundeEvents {
 		if (deletionAnswer.isSuccessful()) {
 			CommandResult creationAnswer = createNewKunde(newBankName, newVorname, newNachname);
 			if (creationAnswer.isSuccessful()) {
-				return CommandResult
-						.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
+				return CommandResult.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
 			}
 		}
 		return CommandResult.error("kunde not edited");

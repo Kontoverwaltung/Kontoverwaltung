@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
+import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
+import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 
 class CommandEventImplTest {
 

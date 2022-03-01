@@ -27,7 +27,7 @@ public class FileHandlerImpl implements FileHandler {
 	@Override
 	public void appendLine(String line) {
 		try {
-			line+="\n";
+			line += "\n";
 			Files.write(file.toPath(), line.getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			e.printStackTrace();

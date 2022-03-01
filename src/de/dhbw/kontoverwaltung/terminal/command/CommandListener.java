@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal;
+package de.dhbw.kontoverwaltung.terminal.command;
 
 public interface CommandListener {
 
