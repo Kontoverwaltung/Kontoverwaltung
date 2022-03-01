@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
-import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
+import de.dhbw.kontoverwaltung.terminal.command.BaseCommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 
 class CommandEventImplTest {
@@ -28,7 +28,7 @@ class CommandEventImplTest {
 	@Test
 	void testCreatePerson() {
 		// KUNDE CREATE {bankName} {Vorname} {Nachname} => personId
-		String testCommand = "kunde create Volksbank-Bruchsal Peter Abriss";
+		SplittedCommand testCommand = new SplittedCommand("kunde create Volksbank-Bruchsal Peter Abriss", " ");
 
 		// prepare
 		kundeEvents = new KundeEvents() {
@@ -71,13 +71,13 @@ class CommandEventImplTest {
 		assertThat(result.getAdditionalInfo(), is("created"));
 	}
 
-	private CommandResult executeOnTarget(String command) {
-		CommandParser target = createTarget();
-		return target.onInput(command);
+	private CommandResult executeOnTarget(SplittedCommand command) {
+		BaseCommandParser target = createTarget();
+		return target.execute(command);
 	}
 
-	private CommandParser createTarget() {
-		return new CommandParser(kundeEvents);
+	private BaseCommandParser createTarget() {
+		return new BaseCommandParser(kundeEvents);
 	}
 
 }

@@ -1,10 +1,11 @@
 package de.dhbw.kontoverwaltung.terminal.process.kunde;
 
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
-import de.dhbw.kontoverwaltung.terminal.command.Command;
+import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
+import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 
-public class CreateKunde implements Command {
+public class CreateKunde extends CommandParser {
 	
 	private KundeEvents kundeEvents;
 
@@ -14,11 +15,11 @@ public class CreateKunde implements Command {
 	}
 
 	@Override
-	public CommandResult execute(String[] inputSplit) {
-		if (inputSplit.length == 5) {
-			String bankName = inputSplit[2];
-			String vorname = inputSplit[3];
-			String nachname = inputSplit[4];
+	public CommandResult execute(SplittedCommand command) {
+		if (command.argsSize() == 5) {
+			String bankName = command.getStringAt(2);
+			String vorname = command.getStringAt(3);
+			String nachname = command.getStringAt(4);
 			return kundeEvents.createNewKunde(bankName, vorname, nachname);
 		}
 		return CommandResult.commandNotFound();

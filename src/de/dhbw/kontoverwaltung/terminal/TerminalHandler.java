@@ -4,16 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import de.dhbw.kontoverwaltung.terminal.command.CommandListener;
+import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 
 public class TerminalHandler {
 
-	private CommandListener commandListener;
+	private static final String SEPERATOR = " ";
+	
+	private CommandParser commandParser;
 	private Thread thread;
 
-	public TerminalHandler(CommandListener commandListener) {
-		this.commandListener = commandListener;
+	public TerminalHandler(CommandParser commandParser) {
+		this.commandParser = commandParser;
 	}
 
 	public void start() {
@@ -22,10 +24,10 @@ public class TerminalHandler {
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 					String input = reader.readLine();
-					if (commandListener != null) {
-						CommandResult result = commandListener.onInput(input);
-						printResult(result);
-					}
+					
+					SplittedCommand splittedCommand = new SplittedCommand(input, SEPERATOR);
+					CommandResult result = commandParser.execute(splittedCommand);
+					printResult(result);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
