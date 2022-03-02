@@ -23,6 +23,7 @@ class SplittedCommandTest {
 			splittedCommand.getIntAt(1);
 		});
 		assertNull(splittedCommand.getStringAt(4));
+		assertNull(splittedCommand.getStringUppercaseAt(4));
 	}
 
 }

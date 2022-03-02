@@ -1,7 +1,7 @@
 package de.dhbw.kontoverwaltung.repositories.returns;
 
 public abstract class Return {
-	
+
 	protected boolean successful;
 
 	public Return(boolean successful) {

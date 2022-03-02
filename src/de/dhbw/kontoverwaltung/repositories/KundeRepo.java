@@ -8,7 +8,7 @@ import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
 public class KundeRepo {
-	
+
 	private static List<Kunde> kunden = new ArrayList<>();
 
 	public static KundeReturn getKundeById(String kundenId) {

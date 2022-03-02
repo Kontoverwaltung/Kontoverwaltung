@@ -4,17 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
+import de.dhbw.kontoverwaltung.terminal.command.UppercaseCommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
 
 public class TerminalHandler {
 
 	private static final String SEPERATOR = " ";
-	
-	private CommandParser commandParser;
+
+	private UppercaseCommandParser commandParser;
 	private Thread thread;
 
-	public TerminalHandler(CommandParser commandParser) {
+	public TerminalHandler(UppercaseCommandParser commandParser) {
 		this.commandParser = commandParser;
 	}
 
@@ -24,7 +24,7 @@ public class TerminalHandler {
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 					String input = reader.readLine();
-					
+
 					SplittedCommand splittedCommand = new SplittedCommand(input, SEPERATOR);
 					CommandResult result = commandParser.execute(splittedCommand);
 					printResult(result);
