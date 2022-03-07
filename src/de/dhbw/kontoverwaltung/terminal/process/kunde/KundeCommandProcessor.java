@@ -7,8 +7,10 @@ public class KundeCommandProcessor extends UppercaseCommandParser {
 
 	public KundeCommandProcessor(KundeEvents kundeEvents) {
 		super(1);
+		commands.put("GET", new GetKundeCommand(kundeEvents));
 		commands.put("CREATE", new CreateKundeCommand(kundeEvents));
-		// TODO
+		commands.put("EDIT", new EditKundeCommand(kundeEvents));
+		commands.put("DELETE", new DeleteKundeCommand(kundeEvents));
 	}
 
 	
