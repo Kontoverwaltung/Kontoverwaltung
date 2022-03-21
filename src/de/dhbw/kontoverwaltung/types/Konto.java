@@ -1,6 +1,7 @@
 package de.dhbw.kontoverwaltung.types;
 
 import de.dhbw.kontoverwaltung.types.personen.Person;
+import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
 public class Konto {
 
@@ -10,13 +11,13 @@ public class Konto {
 	private Betrag betrag;
 	private Pin pin;
 
-	public Konto(Bank bank, String kontoId, Person inhaber, Betrag betrag, Pin pin) {
+	public Konto(Bank bank, Person inhaber, Betrag betrag, Pin pin) {
 		super();
 		this.bank = bank;
-		this.kontoId = kontoId;
 		this.inhaber = inhaber;
 		this.betrag = betrag;
 		this.pin = pin;
+		this.kontoId = UniqueIdGenerator.next();;
 	}
 
 	public Betrag getBetrag() {
