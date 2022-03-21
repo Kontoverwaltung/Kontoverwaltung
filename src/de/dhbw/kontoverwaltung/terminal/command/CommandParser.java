@@ -1,6 +1,7 @@
 package de.dhbw.kontoverwaltung.terminal.command;
 
 import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public abstract class CommandParser {
 

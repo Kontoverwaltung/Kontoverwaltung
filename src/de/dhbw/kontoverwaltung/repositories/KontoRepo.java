@@ -16,7 +16,7 @@ public class KontoRepo {
 
 	public static KontoReturn getKontoById(String kontoId) {
 		for (Konto konto : konten) {
-			if (konto.getKontoId() == kontoId) {
+			if (konto.getKontoId().equals(kontoId)) {
 				return new KontoReturn(true, konto);
 			}
 		}
@@ -31,7 +31,7 @@ public class KontoRepo {
 
 	public static KontoReturn removeKontoById(String kontoId) {
 		for (Konto konto : konten) {
-			if (konto.getKontoId() == kontoId) {
+			if (konto.getKontoId().equals(kontoId)) {
 				konten.remove(konto);
 				return new KontoReturn(true, konto);
 			}

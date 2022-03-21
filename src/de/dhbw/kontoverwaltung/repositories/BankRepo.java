@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.dhbw.kontoverwaltung.repositories.returns.BankReturn;
-import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
 import de.dhbw.kontoverwaltung.types.Bank;
-import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
 public class BankRepo {
 
@@ -14,7 +12,7 @@ public class BankRepo {
 
 	public static BankReturn getBankByName(String bankName) {
 		for (Bank bank : banken) {
-			if (bank.getName() == bankName) {
+			if (bank.getName().equals(bankName)) {
 				return new BankReturn(true, bank);
 			}
 		}
@@ -29,7 +27,7 @@ public class BankRepo {
 
 	public static BankReturn removeBankByName(String bankName) {
 		for (Bank bank : banken) {
-			if (bank.getName() == bankName) {
+			if (bank.getName().equals(bankName)) {
 				banken.remove(bank);
 				return new BankReturn(true, bank);
 			}

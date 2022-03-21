@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
 import de.dhbw.kontoverwaltung.terminal.command.BaseCommandParser;
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 class CommandEventImplTest {
 

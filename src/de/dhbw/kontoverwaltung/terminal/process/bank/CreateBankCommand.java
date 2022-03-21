@@ -1,9 +1,11 @@
 package de.dhbw.kontoverwaltung.terminal.process.bank;
 
+import java.util.Arrays;
+
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public class CreateBankCommand extends CommandParser {
 
@@ -20,7 +22,7 @@ public class CreateBankCommand extends CommandParser {
 			String bankName = command.getStringAt(2);
 			return bankEvents.createBank(bankName);
 		}
-		return CommandResult.commandNotFound();
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("bankname"));
 	}
 
 }

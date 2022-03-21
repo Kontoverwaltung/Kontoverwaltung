@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import de.dhbw.kontoverwaltung.terminal.command.UppercaseCommandParser;
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public class TerminalHandler {
 

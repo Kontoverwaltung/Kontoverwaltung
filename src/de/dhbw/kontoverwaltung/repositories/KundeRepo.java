@@ -13,7 +13,7 @@ public class KundeRepo {
 
 	public static KundeReturn getKundeById(String kundenId) {
 		for (Kunde kunde : kunden) {
-			if (kunde.getKundenId() == kundenId) {
+			if (kunde.getKundenId().equals(kundenId)) {
 				return new KundeReturn(true, kunde);
 			}
 		}
@@ -28,7 +28,7 @@ public class KundeRepo {
 
 	public static KundeReturn removeKundeById(String kundenId) {
 		for (Kunde kunde : kunden) {
-			if (kunde.getKundenId() == kundenId) {
+			if (kunde.getKundenId().equals(kundenId)) {
 				kunden.remove(kunde);
 				return new KundeReturn(true, kunde);
 			}

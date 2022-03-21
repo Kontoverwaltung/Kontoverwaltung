@@ -24,6 +24,8 @@ class SplittedCommandTest {
 		});
 		assertNull(splittedCommand.getStringAt(4));
 		assertNull(splittedCommand.getStringUppercaseAt(4));
+		
+		assertThat(splittedCommand.getCommandUpToPos(3), is("kunde delete 122"));
 	}
-
+	
 }

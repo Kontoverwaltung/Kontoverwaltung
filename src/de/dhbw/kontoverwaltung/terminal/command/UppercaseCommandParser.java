@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public abstract class UppercaseCommandParser extends CommandParser {
 
@@ -20,7 +21,7 @@ public abstract class UppercaseCommandParser extends CommandParser {
 		if (commandParser != null) {
 			return commandParser.execute(command);
 		}
-		return CommandResult.commandNotFound();
+		return CommandResult.usage(command.getCommandUpToPos(position), commands.keySet());
 	}
 
 }

@@ -1,6 +1,6 @@
 package de.dhbw.kontoverwaltung.events.kunde;
 
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public interface KundeEvents {
 

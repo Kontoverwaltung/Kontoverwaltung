@@ -1,9 +1,12 @@
 package de.dhbw.kontoverwaltung.events.kunde;
 
+import de.dhbw.kontoverwaltung.repositories.BankRepo;
 import de.dhbw.kontoverwaltung.repositories.KundeRepo;
+import de.dhbw.kontoverwaltung.repositories.returns.BankReturn;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.types.Bank;
+import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
 public class KundeEventsImpl implements KundeEvents {
 
@@ -11,15 +14,19 @@ public class KundeEventsImpl implements KundeEvents {
 	public CommandResult getKunde(String kundenId) {
 		KundeReturn answer = KundeRepo.getKundeById(kundenId);
 		if (answer.isSuccessful()) {
-			return CommandResult.success("found " + answer.getInstance().getKundenId());
+			Kunde kunde = answer.getInstance();
+			return CommandResult.success("found " + kunde.getVorname() + " " + kunde.getNachname() + " (" + kunde.getBank().getName() + ")");
 		}
 		return CommandResult.error("kunde not found");
 	}
 
 	@Override
 	public CommandResult createNewKunde(String bankName, String vorname, String nachname) {
-		// TODO get Bank from Repo
-		Bank bank = new Bank(bankName);
+		BankReturn bankReturn = BankRepo.getBankByName(bankName);
+		if (!bankReturn.isSuccessful()) {
+			return CommandResult.error("failed to find bank");
+		}
+		Bank bank = bankReturn.getInstance();
 		KundeReturn answer = KundeRepo.addKunde(bank, vorname, nachname);
 		if (answer.isSuccessful()) {
 			return CommandResult.success("created " + answer.getInstance().getKundenId());

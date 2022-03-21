@@ -1,9 +1,11 @@
 package de.dhbw.kontoverwaltung.terminal.process.kunde;
 
+import java.util.Arrays;
+
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
 import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public class DeleteKundeCommand extends CommandParser {
 
@@ -20,6 +22,6 @@ public class DeleteKundeCommand extends CommandParser {
 			String kundenId = command.getStringAt(2);
 			return kundeEvents.deleteKunde(kundenId);
 		}
-		return CommandResult.commandNotFound();
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("kundenid"));
 	}
 }

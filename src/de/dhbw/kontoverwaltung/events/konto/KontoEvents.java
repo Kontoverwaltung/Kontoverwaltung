@@ -1,6 +1,6 @@
 package de.dhbw.kontoverwaltung.events.konto;
 
-import de.dhbw.kontoverwaltung.terminal.command.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.types.Betrag;
 import de.dhbw.kontoverwaltung.types.Pin;

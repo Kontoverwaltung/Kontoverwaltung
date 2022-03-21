@@ -3,9 +3,11 @@ package de.dhbw.kontoverwaltung.terminal;
 public class SplittedCommand {
 
 	private String[] splittedCommand;
+	private String seperator;
 
 	public SplittedCommand(String command, String seperator) {
 		super();
+		this.seperator = seperator;
 		this.splittedCommand = command.split(seperator);
 	}
 
@@ -31,6 +33,14 @@ public class SplittedCommand {
 
 	public int argsSize() {
 		return splittedCommand.length;
+	}
+
+	public String getCommandUpToPos(int position) {
+		StringBuilder stringBuilder = new StringBuilder();
+		for(int i = 0; i < position; i++) {
+			stringBuilder.append(getStringAt(i) + seperator);
+		}
+		return stringBuilder.toString().trim();
 	}
 
 }
