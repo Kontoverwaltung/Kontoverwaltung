@@ -24,4 +24,9 @@ public class Kunde extends Person implements Serializable {
 		return bank;
 	}
 
+	@Override
+	public String toString() {
+		return "[vorname=" + vorname + ", nachname=" + nachname + ", bank=" + bank.getName() + "]";
+	}
+
 }

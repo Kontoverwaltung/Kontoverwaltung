@@ -5,6 +5,7 @@ import de.dhbw.kontoverwaltung.repositories.KundeRepo;
 import de.dhbw.kontoverwaltung.repositories.returns.BankReturn;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
+import de.dhbw.kontoverwaltung.terminal.command.results.ObjectToStringCommandResult;
 import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
@@ -15,8 +16,7 @@ public class KundeEventsImpl implements KundeEvents {
 		KundeReturn answer = KundeRepo.getKundeById(kundenId);
 		if (answer.isSuccessful()) {
 			Kunde kunde = answer.getInstance();
-			return CommandResult.success(
-					"found " + kunde.getVorname() + " " + kunde.getNachname() + " (" + kunde.getBank().getName() + ")");
+			return new ObjectToStringCommandResult(kunde);
 		}
 		return CommandResult.error("kunde not found");
 	}
@@ -30,7 +30,7 @@ public class KundeEventsImpl implements KundeEvents {
 		Bank bank = bankReturn.getInstance();
 		KundeReturn answer = KundeRepo.addKunde(bank, vorname, nachname);
 		if (answer.isSuccessful()) {
-			return CommandResult.success("created " + answer.getInstance().getKundenId());
+			return CommandResult.success("kunde " + answer.getInstance().getKundenId() + " created");
 		}
 		return CommandResult.error("kunde not created");
 	}
