@@ -8,7 +8,7 @@ import de.dhbw.kontoverwaltung.types.Bank;
 public class BankRepo {
 
 	private static PersistentDatabase<Bank> bankDatabase = new PersistentDatabase<>(
-			new FileHandlerImpl("Bank"));
+			new FileHandlerImpl("bank.csv"));
 
 	public static BankReturn getBankByName(String bankName) {
 		Bank bank = bankDatabase.get(bankName);

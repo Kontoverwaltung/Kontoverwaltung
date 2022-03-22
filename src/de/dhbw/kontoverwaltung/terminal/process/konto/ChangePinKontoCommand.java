@@ -18,11 +18,12 @@ public class ChangePinKontoCommand extends CommandParser {
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 4) {
+		if (command.argsSize() == 5) {
 			String kontoId = command.getStringAt(2);
-			String pin = command.getStringAt(3);
-			return kontoEvents.changePin(kontoId, pin);
+			String oldPin = command.getStringAt(3);
+			String newPin = command.getStringAt(4);
+			return kontoEvents.changePin(kontoId, oldPin, newPin);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("kontoid", "pin"));
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("kontoid", "old-pin", "new-pin"));
 	}
 }

@@ -4,10 +4,10 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public interface BankEvents {
 
-	public CommandResult getBank(String name);
+	public CommandResult getBank(String bankName);
 
-	public CommandResult createBank(String name);
+	public CommandResult createBank(String bankName);
 
-	public CommandResult deleteBank(String name);
+	public CommandResult deleteBank(String bankName);
 
 }

@@ -1,6 +1,8 @@
 package de.dhbw.kontoverwaltung.types;
 
-public class Automat {
+import java.io.Serializable;
+
+public class Automat implements Serializable {
 
 	private String automatId;
 

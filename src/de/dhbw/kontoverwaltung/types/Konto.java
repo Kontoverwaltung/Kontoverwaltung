@@ -10,17 +10,16 @@ public class Konto implements Serializable {
 	private Bank bank;
 	private String kontoId;
 	private Person inhaber;
-	private Betrag betrag;
 	private Pin pin;
+	private Betrag betrag;
 
-	public Konto(Bank bank, Person inhaber, Betrag betrag, Pin pin) {
+	public Konto(Bank bank, Person inhaber, Pin pin) {
 		super();
 		this.bank = bank;
 		this.inhaber = inhaber;
-		this.betrag = betrag;
 		this.pin = pin;
 		this.kontoId = UniqueIdGenerator.next();
-		;
+		this.betrag = new Betrag(0, 0);
 	}
 
 	public Betrag getBetrag() {

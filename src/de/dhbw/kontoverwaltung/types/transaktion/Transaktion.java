@@ -1,9 +1,11 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
+import java.io.Serializable;
+
 import de.dhbw.kontoverwaltung.types.Betrag;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
-public abstract class Transaktion {
+public abstract class Transaktion implements Serializable {
 
 	public Transaktion() {
 		transaktionId = UniqueIdGenerator.next();

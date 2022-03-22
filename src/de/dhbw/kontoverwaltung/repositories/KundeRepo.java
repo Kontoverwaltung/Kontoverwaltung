@@ -9,7 +9,7 @@ import de.dhbw.kontoverwaltung.types.personen.Kunde;
 public class KundeRepo {
 
 	private static PersistentDatabase<Kunde> kundeDatabase = new PersistentDatabase<>(
-			new FileHandlerImpl("Kunde"));
+			new FileHandlerImpl("kunde.csv"));
 
 	public static KundeReturn getKundeById(String kundenId) {
 		Kunde kunde = kundeDatabase.get(kundenId);

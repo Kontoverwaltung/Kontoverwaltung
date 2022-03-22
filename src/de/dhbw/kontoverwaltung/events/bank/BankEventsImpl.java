@@ -8,8 +8,8 @@ import de.dhbw.kontoverwaltung.terminal.command.results.ObjectToStringCommandRes
 public class BankEventsImpl implements BankEvents {
 
 	@Override
-	public CommandResult getBank(String name) {
-		BankReturn bankReturn = BankRepo.getBankByName(name);
+	public CommandResult getBank(String bankName) {
+		BankReturn bankReturn = BankRepo.getBankByName(bankName);
 		if (bankReturn.isSuccessful()) {
 			return new ObjectToStringCommandResult(bankReturn.getInstance());
 		}
@@ -17,8 +17,8 @@ public class BankEventsImpl implements BankEvents {
 	}
 
 	@Override
-	public CommandResult createBank(String name) {
-		BankReturn bankReturn = BankRepo.addBank(name);
+	public CommandResult createBank(String bankName) {
+		BankReturn bankReturn = BankRepo.addBank(bankName);
 		if (bankReturn.isSuccessful()) {
 			return CommandResult.success("bank created");
 		}
@@ -26,8 +26,8 @@ public class BankEventsImpl implements BankEvents {
 	}
 
 	@Override
-	public CommandResult deleteBank(String name) {
-		BankReturn bankReturn = BankRepo.removeBankByName(name);
+	public CommandResult deleteBank(String bankName) {
+		BankReturn bankReturn = BankRepo.removeBankByName(bankName);
 		if (bankReturn.isSuccessful()) {
 			return CommandResult.success("bank deleted");
 		}

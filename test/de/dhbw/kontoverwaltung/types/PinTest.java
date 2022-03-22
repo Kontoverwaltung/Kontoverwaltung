@@ -11,12 +11,12 @@ class PinTest {
 
 	@Test
 	void testWrongPin() {
-		assertThat(target.checkPin("bGs22Ax"), is(false));
+		assertThat(target.isCorrectPin("bGs22Ax"), is(false));
 	}
 
 	@Test
 	void testCorrectPin() {
-		assertThat(target.checkPin("22tUzX"), is(true));
+		assertThat(target.isCorrectPin("22tUzX"), is(true));
 	}
 
 }

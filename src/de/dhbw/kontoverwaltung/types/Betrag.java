@@ -1,6 +1,8 @@
 package de.dhbw.kontoverwaltung.types;
 
-public class Betrag {
+import java.io.Serializable;
+
+public class Betrag implements Serializable {
 
 	private int cent;
 	private int euro;

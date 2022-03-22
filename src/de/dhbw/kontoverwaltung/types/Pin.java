@@ -1,6 +1,8 @@
 package de.dhbw.kontoverwaltung.types;
 
-public class Pin {
+import java.io.Serializable;
+
+public class Pin implements Serializable {
 
 	private String pin;
 
@@ -9,11 +11,7 @@ public class Pin {
 		this.pin = pin;
 	}
 
-	public String getPin() {
-		return pin;
-	}
-
-	public boolean checkPin(String pinToCheck) {
+	public boolean isCorrectPin(String pinToCheck) {
 		return pin.equals(pinToCheck);
 	}
 
