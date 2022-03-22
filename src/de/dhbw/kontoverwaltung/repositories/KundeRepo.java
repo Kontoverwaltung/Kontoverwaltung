@@ -1,7 +1,5 @@
 package de.dhbw.kontoverwaltung.repositories;
 
-import java.io.Serializable;
-
 import de.dhbw.kontoverwaltung.database.FileHandlerImpl;
 import de.dhbw.kontoverwaltung.database.PersistentDatabase;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
@@ -10,11 +8,11 @@ import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
 public class KundeRepo {
 
-	private static PersistentDatabase<Serializable> kundeDatabase = new PersistentDatabase<>(
+	private static PersistentDatabase<Kunde> kundeDatabase = new PersistentDatabase<>(
 			new FileHandlerImpl("Kunde"));
 
 	public static KundeReturn getKundeById(String kundenId) {
-		Kunde kunde = (Kunde) kundeDatabase.get(kundenId);
+		Kunde kunde = kundeDatabase.get(kundenId);
 		if (kunde != null) {
 			return new KundeReturn(true, kunde);
 		}
@@ -28,7 +26,7 @@ public class KundeRepo {
 	}
 
 	public static KundeReturn removeKundeById(String kundenId) {
-		Kunde kunde = (Kunde) kundeDatabase.get(kundenId);
+		Kunde kunde = kundeDatabase.get(kundenId);
 		if (kunde != null) {
 			kundeDatabase.remove(kundenId);
 			return new KundeReturn(true, kunde);

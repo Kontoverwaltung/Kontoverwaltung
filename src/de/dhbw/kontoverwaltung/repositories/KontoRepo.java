@@ -1,7 +1,5 @@
 package de.dhbw.kontoverwaltung.repositories;
 
-import java.io.Serializable;
-
 import de.dhbw.kontoverwaltung.database.FileHandlerImpl;
 import de.dhbw.kontoverwaltung.database.PersistentDatabase;
 import de.dhbw.kontoverwaltung.repositories.returns.KontoReturn;
@@ -13,11 +11,11 @@ import de.dhbw.kontoverwaltung.types.personen.Person;
 
 public class KontoRepo {
 
-	private static PersistentDatabase<Serializable> kontoDatabase = new PersistentDatabase<>(
+	private static PersistentDatabase<Konto> kontoDatabase = new PersistentDatabase<>(
 			new FileHandlerImpl("Konto"));
 
 	public static KontoReturn getKontoById(String kontoId) {
-		Konto konto = (Konto) kontoDatabase.get(kontoId);
+		Konto konto = kontoDatabase.get(kontoId);
 		if (konto != null) {
 			return new KontoReturn(true, konto);
 		}
@@ -31,7 +29,7 @@ public class KontoRepo {
 	}
 
 	public static KontoReturn removeKontoById(String kontoId) {
-		Konto konto = (Konto) kontoDatabase.get(kontoId);
+		Konto konto = kontoDatabase.get(kontoId);
 		if (konto != null) {
 			kontoDatabase.remove(kontoId);
 			return new KontoReturn(true, konto);
