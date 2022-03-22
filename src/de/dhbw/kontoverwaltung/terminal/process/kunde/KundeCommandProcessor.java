@@ -13,5 +13,4 @@ public class KundeCommandProcessor extends UppercaseCommandParser {
 		commands.put("DELETE", new DeleteKundeCommand(kundeEvents));
 	}
 
-	
 }

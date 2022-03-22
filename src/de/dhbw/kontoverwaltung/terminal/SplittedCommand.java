@@ -37,7 +37,7 @@ public class SplittedCommand {
 
 	public String getCommandUpToPos(int position) {
 		StringBuilder stringBuilder = new StringBuilder();
-		for(int i = 0; i < position; i++) {
+		for (int i = 0; i < position; i++) {
 			stringBuilder.append(getStringAt(i) + seperator);
 		}
 		return stringBuilder.toString().trim();

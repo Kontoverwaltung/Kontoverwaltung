@@ -1,37 +1,37 @@
 package de.dhbw.kontoverwaltung.repositories;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
+import de.dhbw.kontoverwaltung.database.FileHandlerImpl;
+import de.dhbw.kontoverwaltung.database.PersistentDatabase;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
 import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
 public class KundeRepo {
 
-	private static List<Kunde> kunden = new ArrayList<>();
+	private static PersistentDatabase<Serializable> kundeDatabase = new PersistentDatabase<>(
+			new FileHandlerImpl("Kunde"));
 
 	public static KundeReturn getKundeById(String kundenId) {
-		for (Kunde kunde : kunden) {
-			if (kunde.getKundenId().equals(kundenId)) {
-				return new KundeReturn(true, kunde);
-			}
+		Kunde kunde = (Kunde) kundeDatabase.get(kundenId);
+		if (kunde != null) {
+			return new KundeReturn(true, kunde);
 		}
 		return new KundeReturn(false, null);
 	}
 
 	public static KundeReturn addKunde(Bank bank, String vorname, String nachname) {
 		Kunde neuerKunde = new Kunde(bank, vorname, nachname);
-		kunden.add(neuerKunde);
+		kundeDatabase.set(neuerKunde.getKundenId(), neuerKunde);
 		return new KundeReturn(true, neuerKunde);
 	}
 
 	public static KundeReturn removeKundeById(String kundenId) {
-		for (Kunde kunde : kunden) {
-			if (kunde.getKundenId().equals(kundenId)) {
-				kunden.remove(kunde);
-				return new KundeReturn(true, kunde);
-			}
+		Kunde kunde = (Kunde) kundeDatabase.get(kundenId);
+		if (kunde != null) {
+			kundeDatabase.remove(kundenId);
+			return new KundeReturn(true, kunde);
 		}
 		return new KundeReturn(false, null);
 	}

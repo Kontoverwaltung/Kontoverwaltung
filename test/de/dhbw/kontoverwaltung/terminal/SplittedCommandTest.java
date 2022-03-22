@@ -1,8 +1,8 @@
 package de.dhbw.kontoverwaltung.terminal;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -24,8 +24,8 @@ class SplittedCommandTest {
 		});
 		assertNull(splittedCommand.getStringAt(4));
 		assertNull(splittedCommand.getStringUppercaseAt(4));
-		
+
 		assertThat(splittedCommand.getCommandUpToPos(3), is("kunde delete 122"));
 	}
-	
+
 }

@@ -1,6 +1,8 @@
 package de.dhbw.kontoverwaltung.types;
 
-public class Bank {
+import java.io.Serializable;
+
+public class Bank implements Serializable {
 
 	private String name;
 

@@ -25,6 +25,7 @@ public class EditKundeCommand extends CommandParser {
 			String newNachname = command.getStringAt(5);
 			return kundeEvents.editKunde(kundenId, newBankName, newVorname, newNachname);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("kundenid", "bankname", "vorname", "nachname"));
+		return CommandResult.usage(command.getCommandUpToPos(2),
+				Arrays.asList("kundenid", "bankname", "vorname", "nachname"));
 	}
 }

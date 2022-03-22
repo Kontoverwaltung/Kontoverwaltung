@@ -20,5 +20,5 @@ class TestObject implements Serializable {
 		this.testString = testString;
 		this.testInt = testInt;
 	}
-	
+
 }

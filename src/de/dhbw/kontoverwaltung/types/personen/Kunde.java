@@ -1,9 +1,11 @@
 package de.dhbw.kontoverwaltung.types.personen;
 
+import java.io.Serializable;
+
 import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
-public class Kunde extends Person {
+public class Kunde extends Person implements Serializable {
 
 	private String kundenId;
 	private Bank bank;

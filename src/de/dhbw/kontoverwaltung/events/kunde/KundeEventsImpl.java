@@ -15,7 +15,8 @@ public class KundeEventsImpl implements KundeEvents {
 		KundeReturn answer = KundeRepo.getKundeById(kundenId);
 		if (answer.isSuccessful()) {
 			Kunde kunde = answer.getInstance();
-			return CommandResult.success("found " + kunde.getVorname() + " " + kunde.getNachname() + " (" + kunde.getBank().getName() + ")");
+			return CommandResult.success(
+					"found " + kunde.getVorname() + " " + kunde.getNachname() + " (" + kunde.getBank().getName() + ")");
 		}
 		return CommandResult.error("kunde not found");
 	}
@@ -40,7 +41,8 @@ public class KundeEventsImpl implements KundeEvents {
 		if (deletionAnswer.isSuccessful()) {
 			CommandResult creationAnswer = createNewKunde(newBankName, newVorname, newNachname);
 			if (creationAnswer.isSuccessful()) {
-				return CommandResult.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
+				return CommandResult
+						.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
 			}
 		}
 		return CommandResult.error("kunde not edited");

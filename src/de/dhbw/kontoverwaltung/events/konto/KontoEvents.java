@@ -10,13 +10,12 @@ public interface KontoEvents {
 
 	public CommandResult getKonto(String kontoId);
 
-	public CommandResult createNewKonto(Bank bank, String kontoId, Person inhaber, Betrag betrag, Pin pin);
+	public CommandResult createNewKonto(Bank bank, Person inhaber, Betrag betrag, Pin pin);
 
-	public CommandResult editKonto(String oldKontoId, Bank newBank, String newKontoId, Person newInhaber,
-			Betrag newBetrag, Pin newPin);
+	public CommandResult editKonto(String oldKontoId, Bank newBank, Person newInhaber, Betrag newBetrag, Pin newPin);
 
 	public CommandResult deleteKonto(String kontoId);
-	
+
 	public CommandResult changePin(String kontoId, String newPin);
 
 }

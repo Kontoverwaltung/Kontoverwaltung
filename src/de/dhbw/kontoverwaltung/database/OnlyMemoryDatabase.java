@@ -17,8 +17,13 @@ public class OnlyMemoryDatabase<T> implements KeyValueDatabase<T> {
 	}
 
 	@Override
-	public void remove(String key) {
-		storage.remove(key);
+	public T remove(String key) {
+		T object = storage.get(key);
+		if (object != null) {
+			storage.remove(key);
+			return object;
+		}
+		return null;
 	}
 
 }

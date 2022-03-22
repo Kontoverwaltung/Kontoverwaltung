@@ -15,14 +15,13 @@ public class KontoEventsImpl implements KontoEvents {
 	}
 
 	@Override
-	public CommandResult createNewKonto(Bank bank, String kontoId, Person inhaber, Betrag betrag, Pin pin) {
+	public CommandResult createNewKonto(Bank bank, Person inhaber, Betrag betrag, Pin pin) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CommandResult editKonto(String oldKontoId, Bank newBank, String newKontoId, Person newInhaber,
-			Betrag newBetrag, Pin newPin) {
+	public CommandResult editKonto(String oldKontoId, Bank newBank, Person newInhaber, Betrag newBetrag, Pin newPin) {
 		// TODO Auto-generated method stub
 		return null;
 	}

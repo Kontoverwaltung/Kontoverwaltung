@@ -6,6 +6,6 @@ public interface KeyValueDatabase<T> {
 
 	public void set(String key, T object);
 
-	public void remove(String key);
+	public T remove(String key);
 
 }

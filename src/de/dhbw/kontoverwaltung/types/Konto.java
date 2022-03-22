@@ -1,9 +1,11 @@
 package de.dhbw.kontoverwaltung.types;
 
+import java.io.Serializable;
+
 import de.dhbw.kontoverwaltung.types.personen.Person;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
-public class Konto {
+public class Konto implements Serializable {
 
 	private Bank bank;
 	private String kontoId;
@@ -17,7 +19,8 @@ public class Konto {
 		this.inhaber = inhaber;
 		this.betrag = betrag;
 		this.pin = pin;
-		this.kontoId = UniqueIdGenerator.next();;
+		this.kontoId = UniqueIdGenerator.next();
+		;
 	}
 
 	public Betrag getBetrag() {

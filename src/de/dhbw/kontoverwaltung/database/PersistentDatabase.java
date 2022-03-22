@@ -45,11 +45,13 @@ public class PersistentDatabase<T extends Serializable> implements KeyValueDatab
 	}
 
 	@Override
-	public void remove(String key) {
+	public T remove(String key) {
 		T object = get(key);
 		if (object != null) {
 			fileHandler.deleteLine(createLine(key, object));
+			return object;
 		}
+		return null;
 	}
 
 	private String createLine(String key, T object) {
