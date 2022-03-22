@@ -16,7 +16,7 @@ BANK CREATE testbank1
 ```
 KUNDE CREATE testbank1 Peter Maier
 ```
-`SUCCESS: created c34880fc-0941-4ff2-b018-d2ec117f8e9c`
+`SUCCESS: kunde c34880fc-0941-4ff2-b018-d2ec117f8e9c created`
 <br/><br/>
 
 ```
