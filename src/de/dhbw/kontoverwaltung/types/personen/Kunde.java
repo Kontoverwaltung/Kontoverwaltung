@@ -26,7 +26,10 @@ public class Kunde extends Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return "[vorname=" + vorname + ", nachname=" + nachname + ", bank=" + bank.getName() + "]";
+		return "Kunde [KundenID=" + kundenId + ", Bank=" + bank + "]";
 	}
+	
+	
+
 
 }

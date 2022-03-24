@@ -50,4 +50,10 @@ public class Konto implements Serializable {
 		return inhaber;
 	}
 
+	@Override
+	public String toString() {
+		return "Konto [Bank=" + bank + ", KontoID=" + kontoId + ", Inhaber=" + inhaber + ", Pin=" + pin + ", Betrag="
+				+ betrag + "]";
+	}
+	
 }

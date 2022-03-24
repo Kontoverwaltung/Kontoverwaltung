@@ -15,4 +15,9 @@ public class Automat implements Serializable {
 		return automatId;
 	}
 
+	@Override
+	public String toString() {
+		return "Automat [AutomatID=" + automatId + "]";
+	}
+	
 }

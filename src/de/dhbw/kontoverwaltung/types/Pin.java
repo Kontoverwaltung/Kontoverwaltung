@@ -15,4 +15,9 @@ public class Pin implements Serializable {
 		return pin.equals(pinToCheck);
 	}
 
+	@Override
+	public String toString() {
+		return "Pin [Pin=" + pin + "]";
+	}
+	
 }
