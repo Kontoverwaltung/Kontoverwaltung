@@ -36,19 +36,6 @@ public class KundeEventsImpl implements KundeEvents {
 	}
 
 	@Override
-	public CommandResult editKunde(String oldKundenId, String newBankName, String newVorname, String newNachname) {
-		CommandResult deletionAnswer = deleteKunde(oldKundenId);
-		if (deletionAnswer.isSuccessful()) {
-			CommandResult creationAnswer = createNewKunde(newBankName, newVorname, newNachname);
-			if (creationAnswer.isSuccessful()) {
-				return CommandResult
-						.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
-			}
-		}
-		return CommandResult.error("kunde not edited");
-	}
-
-	@Override
 	public CommandResult deleteKunde(String kundenId) {
 		KundeReturn answer = KundeRepo.removeKundeById(kundenId);
 		if (answer.isSuccessful()) {
