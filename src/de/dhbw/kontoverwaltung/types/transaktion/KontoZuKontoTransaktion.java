@@ -1,25 +1,25 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
 import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
-import de.dhbw.kontoverwaltung.types.Konto;
+import de.dhbw.kontoverwaltung.types.GiroKonto;
 
 public class KontoZuKontoTransaktion extends Transaktion {
 
-	private Konto sender;
-	private Konto empfaenger;
+	private GiroKonto sender;
+	private GiroKonto empfaenger;
 
-	public KontoZuKontoTransaktion(Konto sender, Konto empfaenger, EuroCentBetrag betrag) {
+	public KontoZuKontoTransaktion(GiroKonto sender, GiroKonto empfaenger, EuroCentBetrag betrag) {
 		super();
 		this.sender = sender;
 		this.empfaenger = empfaenger;
 		this.betrag = betrag;
 	}
 
-	public Konto getSender() {
+	public GiroKonto getSender() {
 		return sender;
 	}
 
-	public Konto getEmpfaenger() {
+	public GiroKonto getEmpfaenger() {
 		return empfaenger;
 	}
 

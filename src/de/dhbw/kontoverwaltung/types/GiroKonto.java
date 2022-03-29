@@ -5,7 +5,7 @@ import java.io.Serializable;
 import de.dhbw.kontoverwaltung.types.personen.Person;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
-public class Konto implements Serializable {
+public class GiroKonto implements Serializable {
 
 	private Bank bank;
 	private String kontoId;
@@ -13,7 +13,7 @@ public class Konto implements Serializable {
 	private Pin pin;
 	private EuroCentBetrag betrag;
 
-	public Konto(Bank bank, Person inhaber, Pin pin) {
+	public GiroKonto(Bank bank, Person inhaber, Pin pin) {
 		super();
 		this.bank = bank;
 		this.inhaber = inhaber;

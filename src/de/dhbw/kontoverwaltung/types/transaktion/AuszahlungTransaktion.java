@@ -2,14 +2,14 @@ package de.dhbw.kontoverwaltung.types.transaktion;
 
 import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
 import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
-import de.dhbw.kontoverwaltung.types.Konto;
+import de.dhbw.kontoverwaltung.types.GiroKonto;
 
 public class AuszahlungTransaktion extends Transaktion {
 
 	private GeldAusgabeAutomat automat;
-	private Konto konto;
+	private GiroKonto konto;
 
-	public AuszahlungTransaktion(GeldAusgabeAutomat automat, Konto konto, EuroCentBetrag betrag) {
+	public AuszahlungTransaktion(GeldAusgabeAutomat automat, GiroKonto konto, EuroCentBetrag betrag) {
 		super();
 		this.automat = automat;
 		this.konto = konto;
@@ -20,7 +20,7 @@ public class AuszahlungTransaktion extends Transaktion {
 		return automat;
 	}
 
-	public Konto getKonto() {
+	public GiroKonto getKonto() {
 		return konto;
 	}
 
