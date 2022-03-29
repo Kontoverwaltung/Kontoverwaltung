@@ -1,9 +1,7 @@
 package de.dhbw.kontoverwaltung.terminal;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,19 +24,6 @@ class SplittedCommandTest {
 	@Test
 	void testIntAt() {
 		assertThat(splittedCommand.getIntAt(2), is(122));
-	}
-
-	@Test
-	void testNumberFormatException() {
-		assertThrows(NumberFormatException.class, () -> {
-			splittedCommand.getIntAt(1);
-		});
-	}
-
-	@Test
-	void testNull() {
-		assertNull(splittedCommand.getStringAt(4));
-		assertNull(splittedCommand.getStringUppercaseAt(4));
 	}
 
 	@Test
