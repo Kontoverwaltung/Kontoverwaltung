@@ -11,7 +11,7 @@ public class Konto implements Serializable {
 	private String kontoId;
 	private Person inhaber;
 	private Pin pin;
-	private Betrag betrag;
+	private GeldBetrag betrag;
 
 	public Konto(Bank bank, Person inhaber, Pin pin) {
 		super();
@@ -19,14 +19,14 @@ public class Konto implements Serializable {
 		this.inhaber = inhaber;
 		this.pin = pin;
 		this.kontoId = UniqueIdGenerator.next();
-		this.betrag = new Betrag(0, 0);
+		this.betrag = new GeldBetrag(0, 0);
 	}
 
-	public Betrag getBetrag() {
+	public GeldBetrag getBetrag() {
 		return betrag;
 	}
 
-	public void setBetrag(Betrag betrag) {
+	public void setBetrag(GeldBetrag betrag) {
 		this.betrag = betrag;
 	}
 

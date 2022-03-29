@@ -2,11 +2,11 @@ package de.dhbw.kontoverwaltung.types;
 
 import java.io.Serializable;
 
-public class Automat implements Serializable {
+public class GeldAusgabeAutomat implements Serializable {
 
 	private String automatId;
 
-	public Automat(String automatId) {
+	public GeldAusgabeAutomat(String automatId) {
 		super();
 		this.automatId = automatId;
 	}

@@ -2,7 +2,7 @@ package de.dhbw.kontoverwaltung.types.transaktion;
 
 import java.io.Serializable;
 
-import de.dhbw.kontoverwaltung.types.Betrag;
+import de.dhbw.kontoverwaltung.types.GeldBetrag;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
 public abstract class Transaktion implements Serializable {
@@ -12,13 +12,13 @@ public abstract class Transaktion implements Serializable {
 	}
 
 	protected String transaktionId;
-	protected Betrag betrag;
+	protected GeldBetrag betrag;
 
 	public String getTransaktionId() {
 		return transaktionId;
 	}
 
-	public Betrag getBetrag() {
+	public GeldBetrag getBetrag() {
 		return betrag;
 	}
 

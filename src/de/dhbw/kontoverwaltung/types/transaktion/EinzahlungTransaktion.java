@@ -1,22 +1,22 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
-import de.dhbw.kontoverwaltung.types.Automat;
-import de.dhbw.kontoverwaltung.types.Betrag;
+import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
+import de.dhbw.kontoverwaltung.types.GeldBetrag;
 import de.dhbw.kontoverwaltung.types.Konto;
 
 public class EinzahlungTransaktion extends Transaktion {
 
-	private Automat automat;
+	private GeldAusgabeAutomat automat;
 	private Konto konto;
 
-	public EinzahlungTransaktion(Automat automat, Konto konto, Betrag betrag) {
+	public EinzahlungTransaktion(GeldAusgabeAutomat automat, Konto konto, GeldBetrag betrag) {
 		super();
 		this.automat = automat;
 		this.konto = konto;
 		this.betrag = betrag;
 	}
 
-	public Automat getAutomat() {
+	public GeldAusgabeAutomat getAutomat() {
 		return automat;
 	}
 
