@@ -3,6 +3,12 @@ package de.dhbw.kontoverwaltung;
 import de.dhbw.kontoverwaltung.events.bank.BankEventsImpl;
 import de.dhbw.kontoverwaltung.events.konto.KontoEventsImpl;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEventsImpl;
+import de.dhbw.kontoverwaltung.repositories.BankRepo;
+import de.dhbw.kontoverwaltung.repositories.BankRepoImpl;
+import de.dhbw.kontoverwaltung.repositories.KontoRepo;
+import de.dhbw.kontoverwaltung.repositories.KontoRepoImpl;
+import de.dhbw.kontoverwaltung.repositories.KundeRepo;
+import de.dhbw.kontoverwaltung.repositories.KundeRepoImpl;
 import de.dhbw.kontoverwaltung.terminal.TerminalHandler;
 import de.dhbw.kontoverwaltung.terminal.command.BaseCommandParser;
 
@@ -14,9 +20,13 @@ public class KontoverwaltungApp {
 	}
 
 	private void start() {
-		KundeEventsImpl kundeEventsImpl = new KundeEventsImpl();
-		BankEventsImpl bankEventsImpl = new BankEventsImpl();
-		KontoEventsImpl kontoEventsImpl = new KontoEventsImpl();
+		KontoRepo kontoRepo = new KontoRepoImpl();
+		BankRepo bankRepo = new BankRepoImpl();
+		KundeRepo kundeRepo = new KundeRepoImpl();
+
+		KundeEventsImpl kundeEventsImpl = new KundeEventsImpl(bankRepo, kundeRepo);
+		BankEventsImpl bankEventsImpl = new BankEventsImpl(bankRepo);
+		KontoEventsImpl kontoEventsImpl = new KontoEventsImpl(kontoRepo, bankRepo, kundeRepo);
 
 		BaseCommandParser commandParser = new BaseCommandParser(kundeEventsImpl, bankEventsImpl, kontoEventsImpl);
 

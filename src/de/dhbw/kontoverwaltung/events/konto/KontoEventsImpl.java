@@ -15,9 +15,19 @@ import de.dhbw.kontoverwaltung.types.personen.Person;
 
 public class KontoEventsImpl implements KontoEvents {
 
+	private KontoRepo kontoRepo;
+	private BankRepo bankRepo;
+	private KundeRepo kundeRepo;
+
+	public KontoEventsImpl(KontoRepo kontoRepo, BankRepo bankRepo, KundeRepo kundeRepo) {
+		this.kontoRepo = kontoRepo;
+		this.bankRepo = bankRepo;
+		this.kundeRepo = kundeRepo;
+	}
+
 	@Override
 	public CommandResult getKonto(String kontoId) {
-		KontoReturn kontoReturn = KontoRepo.getKontoById(kontoId);
+		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoId);
 		if (kontoReturn.isSuccessful()) {
 			return new ObjectToStringCommandResult(kontoReturn.getInstance());
 		}
@@ -26,30 +36,30 @@ public class KontoEventsImpl implements KontoEvents {
 
 	@Override
 	public CommandResult createNewKonto(String bankName, String personId, String pin) {
-		BankReturn bankReturn = BankRepo.getBankByName(bankName);
+		BankReturn bankReturn = bankRepo.getBankByName(bankName);
 		if (!bankReturn.isSuccessful()) {
 			return CommandResult.error("failed to load bank");
 		}
 		Bank bank = bankReturn.getInstance();
 
-		KundeReturn kundeReturn = KundeRepo.getKundeById(personId);
+		KundeReturn kundeReturn = kundeRepo.getKundeById(personId);
 		if (!kundeReturn.isSuccessful()) {
 			return CommandResult.error("failed to load kunde");
 		}
 		Person inhaber = kundeReturn.getInstance();
 
 		Pin pinObject = new Pin(pin);
-		KontoReturn kontoReturn = KontoRepo.addKonto(bank, inhaber, pinObject);
+		KontoReturn kontoReturn = kontoRepo.addKonto(bank, inhaber, pinObject);
 
 		if (kontoReturn.isSuccessful()) {
-			return CommandResult.success("konto " +  kontoReturn.getInstance().getKontoId() + " created");
+			return CommandResult.success("konto " + kontoReturn.getInstance().getKontoId() + " created");
 		}
 		return CommandResult.error("failed to create konto");
 	}
 
 	@Override
 	public CommandResult deleteKonto(String kontoId) {
-		KontoReturn kontoReturn = KontoRepo.removeKontoById(kontoId);
+		KontoReturn kontoReturn = kontoRepo.removeKontoById(kontoId);
 		if (kontoReturn.isSuccessful()) {
 			return CommandResult.success("konto deleted");
 		}
@@ -58,7 +68,7 @@ public class KontoEventsImpl implements KontoEvents {
 
 	@Override
 	public CommandResult changePin(String kontoId, String oldPin, String newPin) {
-		KontoReturn kontoReturn = KontoRepo.getKontoById(kontoId);
+		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoId);
 		if (!kontoReturn.isSuccessful()) {
 			return CommandResult.error("failed to load konto");
 		}
@@ -70,7 +80,7 @@ public class KontoEventsImpl implements KontoEvents {
 			return CommandResult.error("old pin is incorrect");
 		}
 
-		KontoReturn pinUpdateReturn = KontoRepo.updatePin(konto, new Pin(newPin));
+		KontoReturn pinUpdateReturn = kontoRepo.updatePin(konto, new Pin(newPin));
 		if (pinUpdateReturn.isSuccessful()) {
 			return CommandResult.success("pin changed");
 		}

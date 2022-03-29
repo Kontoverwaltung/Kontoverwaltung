@@ -11,9 +11,17 @@ import de.dhbw.kontoverwaltung.types.personen.Kunde;
 
 public class KundeEventsImpl implements KundeEvents {
 
+	private BankRepo bankRepo;
+	private KundeRepo kundeRepo;
+
+	public KundeEventsImpl(BankRepo bankRepo, KundeRepo kundeRepo) {
+		this.bankRepo = bankRepo;
+		this.kundeRepo = kundeRepo;
+	}
+
 	@Override
 	public CommandResult getKunde(String kundenId) {
-		KundeReturn answer = KundeRepo.getKundeById(kundenId);
+		KundeReturn answer = kundeRepo.getKundeById(kundenId);
 		if (answer.isSuccessful()) {
 			Kunde kunde = answer.getInstance();
 			return new ObjectToStringCommandResult(kunde);
@@ -23,12 +31,12 @@ public class KundeEventsImpl implements KundeEvents {
 
 	@Override
 	public CommandResult createNewKunde(String bankName, String vorname, String nachname) {
-		BankReturn bankReturn = BankRepo.getBankByName(bankName);
+		BankReturn bankReturn = bankRepo.getBankByName(bankName);
 		if (!bankReturn.isSuccessful()) {
 			return CommandResult.error("failed to find bank");
 		}
 		Bank bank = bankReturn.getInstance();
-		KundeReturn answer = KundeRepo.addKunde(bank, vorname, nachname);
+		KundeReturn answer = kundeRepo.addKunde(bank, vorname, nachname);
 		if (answer.isSuccessful()) {
 			return CommandResult.success("kunde " + answer.getInstance().getKundenId() + " created");
 		}
@@ -41,8 +49,7 @@ public class KundeEventsImpl implements KundeEvents {
 		if (deletionAnswer.isSuccessful()) {
 			CommandResult creationAnswer = createNewKunde(newBankName, newVorname, newNachname);
 			if (creationAnswer.isSuccessful()) {
-				return CommandResult
-						.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
+				return CommandResult.success(deletionAnswer.getAdditionalInfo() + ", " + creationAnswer.getAdditionalInfo());
 			}
 		}
 		return CommandResult.error("kunde not edited");
@@ -50,7 +57,7 @@ public class KundeEventsImpl implements KundeEvents {
 
 	@Override
 	public CommandResult deleteKunde(String kundenId) {
-		KundeReturn answer = KundeRepo.removeKundeById(kundenId);
+		KundeReturn answer = kundeRepo.removeKundeById(kundenId);
 		if (answer.isSuccessful()) {
 			return CommandResult.success("deleted " + answer.getInstance().getKundenId());
 		}
