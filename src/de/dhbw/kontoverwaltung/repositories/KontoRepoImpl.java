@@ -4,6 +4,7 @@ import de.dhbw.kontoverwaltung.database.FileHandlerImpl;
 import de.dhbw.kontoverwaltung.database.PersistentDatabase;
 import de.dhbw.kontoverwaltung.repositories.returns.KontoReturn;
 import de.dhbw.kontoverwaltung.types.Bank;
+import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 import de.dhbw.kontoverwaltung.types.Pin;
 import de.dhbw.kontoverwaltung.types.personen.Person;
@@ -41,4 +42,13 @@ public class KontoRepoImpl implements KontoRepo {
 		}
 		return new KontoReturn(false, null);
 	}
+
+	@Override
+	public KontoReturn updateBetrag(GiroKonto konto, EuroCentBetrag betrag) {
+		kontoDatabase.remove(konto.getKontoId());
+		konto.setBetrag(betrag);
+		kontoDatabase.set(konto.getKontoId(), konto);
+		return new KontoReturn(true, konto);
+	}
+	
 }

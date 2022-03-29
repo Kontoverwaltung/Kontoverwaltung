@@ -64,13 +64,5 @@ public class GiroKonto implements Serializable {
 		}
 		return true;
 	}
-	
-	public void subtractMoney(EuroCentBetrag betragSub) {
-		betrag = betrag.subtract(betragSub);
-	}
-
-	public void addMoney(EuroCentBetrag betragAdd) {
-		betrag = betrag.add(betragAdd);
-	}
 
 }

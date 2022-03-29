@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.dhbw.kontoverwaltung.events.automat.AutomatEvents;
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
@@ -22,6 +23,7 @@ class CommandEventImplTest {
 	private BankEvents bankEvents;
 	private KontoEvents kontoEvents;
 	private TransferEvents transferEvents;
+	private AutomatEvents automatEvents;
 
 	@BeforeEach
 	public void prepare() {
@@ -31,6 +33,8 @@ class CommandEventImplTest {
 		kundeEvents = null;
 		bankEvents = null;
 		kontoEvents = null;
+		transferEvents = null;
+		automatEvents = null;
 	}
 
 	@Test
@@ -76,7 +80,7 @@ class CommandEventImplTest {
 	}
 
 	private BaseCommandParser createTarget() {
-		return new BaseCommandParser(kundeEvents, bankEvents, kontoEvents, transferEvents);
+		return new BaseCommandParser(kundeEvents, bankEvents, kontoEvents, transferEvents, automatEvents);
 	}
 
 }

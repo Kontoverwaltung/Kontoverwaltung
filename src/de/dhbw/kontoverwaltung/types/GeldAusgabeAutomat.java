@@ -5,10 +5,12 @@ import java.io.Serializable;
 public class GeldAusgabeAutomat implements Serializable {
 
 	private String automatId;
+	private EuroCentBetrag betrag;
 
-	public GeldAusgabeAutomat(String automatId) {
+	public GeldAusgabeAutomat(String automatId,EuroCentBetrag betrag) {
 		super();
 		this.automatId = automatId;
+		this.betrag = betrag;
 	}
 
 	public String getAutomatId() {

@@ -32,17 +32,28 @@ public class TransferEventsImpl implements TransferEvents {
 		}
 
 		GiroKonto from = kontoReturnFrom.getInstance();
+		GiroKonto to = kontoReturnTo.getInstance();
 
 		if (!from.hatMehrGeldAls(betrag)) {
 			return CommandResult.error("not enough money");
 		}
 
-		from.subtractMoney(betrag);
+		EuroCentBetrag fromBetrag = from.getBetrag();
+		EuroCentBetrag toBetrag = to.getBetrag();
 
-		GiroKonto to = kontoReturnTo.getInstance();
-		to.addMoney(betrag);
+		EuroCentBetrag fromBetragNeu = fromBetrag.subtract(betrag);
+		EuroCentBetrag toBetragNeu = toBetrag.add(betrag);
 
-		return CommandResult.success("transfere complete");
+		KontoReturn updateBetragFrom = kontoRepo.updateBetrag(from, fromBetragNeu);
+		KontoReturn updateBetragTo = kontoRepo.updateBetrag(to, toBetragNeu);
+
+		boolean success = updateBetragFrom.isSuccessful() && updateBetragTo.isSuccessful();
+
+		if (success) {
+			return CommandResult.success("transfere complete");
+		} else {
+			return CommandResult.error("failed during transfer");
+		}
 	}
 
 }
