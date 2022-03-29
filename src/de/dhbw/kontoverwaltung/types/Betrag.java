@@ -21,4 +21,9 @@ public class Betrag implements Serializable {
 		return euro;
 	}
 
+	@Override
+	public String toString() {
+		return "Betrag [" + euro + "," + cent + "€]";
+	}
+	
 }

@@ -15,4 +15,9 @@ public class Bank implements Serializable {
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return "Bank [Name=" + name + "]";
+	}
+	
 }

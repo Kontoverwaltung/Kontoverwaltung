@@ -55,13 +55,6 @@ class CommandEventImplTest {
 			}
 
 			@Override
-			public CommandResult editKunde(String oldKundenId, String newBankName, String newVorname,
-					String newNachname) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
 			public CommandResult deleteKunde(String kundenId) {
 				// TODO Auto-generated method stub
 				return null;

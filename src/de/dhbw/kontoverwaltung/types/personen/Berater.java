@@ -21,4 +21,9 @@ public class Berater extends Person {
 		return bank;
 	}
 
+	@Override
+	public String toString() {
+		return "Berater [BeraterID=" + beraterId + ", Bank=" + bank + "]";
+	}
+	
 }
