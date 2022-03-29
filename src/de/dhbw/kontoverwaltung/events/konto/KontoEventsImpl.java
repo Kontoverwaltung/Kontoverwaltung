@@ -9,7 +9,7 @@ import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.terminal.command.results.ObjectToStringCommandResult;
 import de.dhbw.kontoverwaltung.types.Bank;
-import de.dhbw.kontoverwaltung.types.Konto;
+import de.dhbw.kontoverwaltung.types.GiroKonto;
 import de.dhbw.kontoverwaltung.types.Pin;
 import de.dhbw.kontoverwaltung.types.personen.Person;
 
@@ -73,7 +73,7 @@ public class KontoEventsImpl implements KontoEvents {
 			return CommandResult.error("failed to load konto");
 		}
 
-		Konto konto = kontoReturn.getInstance();
+		GiroKonto konto = kontoReturn.getInstance();
 		Pin kontoPin = konto.getPin();
 
 		if (!kontoPin.isCorrectPin(oldPin)) {

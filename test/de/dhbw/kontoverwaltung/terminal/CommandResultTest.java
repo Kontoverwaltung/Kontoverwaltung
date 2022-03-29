@@ -46,7 +46,7 @@ class CommandResultTest {
 	@Test
 	void testPossibilities() {
 		CommandResult target = CommandResult.usage("BANK", Stream.of("DELETE", "CREATE").collect(Collectors.toSet()));
-		assertThat(target.toString(), is("BANK <DELETE|CREATE>"));
+		assertThat(target.toString(), is(ERROR_INCOMPLETE_COMMAND + "BANK <DELETE|CREATE>"));
 	}
 
 	@Test

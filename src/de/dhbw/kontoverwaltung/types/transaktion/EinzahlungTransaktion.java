@@ -1,26 +1,26 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
-import de.dhbw.kontoverwaltung.types.Automat;
-import de.dhbw.kontoverwaltung.types.Betrag;
-import de.dhbw.kontoverwaltung.types.Konto;
+import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
+import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
+import de.dhbw.kontoverwaltung.types.GiroKonto;
 
 public class EinzahlungTransaktion extends Transaktion {
 
-	private Automat automat;
-	private Konto konto;
+	private GeldAusgabeAutomat automat;
+	private GiroKonto konto;
 
-	public EinzahlungTransaktion(Automat automat, Konto konto, Betrag betrag) {
+	public EinzahlungTransaktion(GeldAusgabeAutomat automat, GiroKonto konto, EuroCentBetrag betrag) {
 		super();
 		this.automat = automat;
 		this.konto = konto;
 		this.betrag = betrag;
 	}
 
-	public Automat getAutomat() {
+	public GeldAusgabeAutomat getAutomat() {
 		return automat;
 	}
 
-	public Konto getKonto() {
+	public GiroKonto getKonto() {
 		return konto;
 	}
 
