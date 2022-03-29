@@ -13,48 +13,52 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 class CommandResultTest {
 
+	private static final String TEST_OK = "test ok";
+	private static final String TEST_ERROR = "test error";
+	
+	private static final String ERROR_INCOMPLETE_COMMAND = "ERROR: incomplete command: ";
+	
+	private CommandResult targetError = CommandResult.error(TEST_ERROR);
+	private CommandResult targetOk = CommandResult.success(TEST_OK);
+
 	@Test
 	void testSuccessData() {
-		CommandResult target = CommandResult.success("test ok");
-		assertThat(target.isSuccessful(), is(true));
-		assertThat(target.getAdditionalInfo(), is("test ok"));
+		assertThat(targetOk.isSuccessful(), is(true));
+		assertThat(targetOk.getAdditionalInfo(), is(TEST_OK));
 	}
 
 	@Test
 	void testErrorData() {
-		CommandResult target = CommandResult.error("test error");
-		assertThat(target.isSuccessful(), is(false));
-		assertThat(target.getAdditionalInfo(), is("test error"));
+		assertThat(targetError.isSuccessful(), is(false));
+		assertThat(targetError.getAdditionalInfo(), is(TEST_ERROR));
 	}
 
 	@Test
 	void testSuccessToString() {
-		CommandResult target = CommandResult.success("test ok");
-		assertThat(target.toString(), is("SUCCESS: test ok"));
+		assertThat(targetOk.toString(), is("SUCCESS: " + TEST_OK));
 	}
 
 	@Test
 	void testErrorToString() {
-		CommandResult target = CommandResult.error("test error");
-		assertThat(target.toString(), is("ERROR: test error"));
+		assertThat(targetError.toString(), is("ERROR: " + TEST_ERROR));
 	}
 
 	@Test
 	void testPossibilities() {
 		CommandResult target = CommandResult.usage("BANK", Stream.of("DELETE", "CREATE").collect(Collectors.toSet()));
-		assertThat(target.toString(), is("ERROR: incomplete command: BANK <DELETE|CREATE>"));
+		assertThat(target.toString(), is("BANK <DELETE|CREATE>"));
 	}
 
 	@Test
 	void testPossibilitiesStart() {
 		CommandResult target = CommandResult.usage("", Stream.of("BANK", "KUNDE").collect(Collectors.toSet()));
-		assertThat(target.toString(), is("ERROR: incomplete command: <BANK|KUNDE>"));
+		assertThat(target.toString(), is(ERROR_INCOMPLETE_COMMAND + "<BANK|KUNDE>"));
 	}
 
 	@Test
 	void testMultiInput() {
 		CommandResult target = CommandResult.usage("BANK CREATE", Arrays.asList("name", "id"));
-		assertThat(target.toString(), is("ERROR: incomplete command: BANK CREATE <name> <id>"));
+		assertThat(target.toString(), is(ERROR_INCOMPLETE_COMMAND + "BANK CREATE <name> <id>"));
 	}
 
 }
