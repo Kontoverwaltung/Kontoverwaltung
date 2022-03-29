@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
+import de.dhbw.kontoverwaltung.events.transfer.TransferEvents;
 import de.dhbw.kontoverwaltung.terminal.command.BaseCommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
@@ -20,6 +21,7 @@ class CommandEventImplTest {
 	private KundeEvents kundeEvents;
 	private BankEvents bankEvents;
 	private KontoEvents kontoEvents;
+	private TransferEvents transferEvents;
 
 	@BeforeEach
 	public void prepare() {
@@ -50,13 +52,11 @@ class CommandEventImplTest {
 
 			@Override
 			public CommandResult getKunde(String kundenId) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
 			public CommandResult deleteKunde(String kundenId) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 		};
@@ -76,7 +76,7 @@ class CommandEventImplTest {
 	}
 
 	private BaseCommandParser createTarget() {
-		return new BaseCommandParser(kundeEvents, bankEvents, kontoEvents);
+		return new BaseCommandParser(kundeEvents, bankEvents, kontoEvents, transferEvents);
 	}
 
 }

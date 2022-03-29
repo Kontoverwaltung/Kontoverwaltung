@@ -52,8 +52,25 @@ public class GiroKonto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Konto [Bank=" + bank + ", KontoID=" + kontoId + ", Inhaber=" + inhaber + ", Pin=" + pin + ", Betrag="
-				+ betrag + "]";
+		return "Konto [Bank=" + bank + ", KontoID=" + kontoId + ", Inhaber=" + inhaber + ", Pin=" + pin + ", Betrag=" + betrag + "]";
+	}
+
+	public boolean hatMehrGeldAls(EuroCentBetrag betragCheck) {
+		if (betrag.getEuro() < betragCheck.getEuro()) {
+			return false;
+		}
+		if (betrag.getCent() < betragCheck.getCent()) {
+			return false;
+		}
+		return true;
 	}
 	
+	public void subtractMoney(EuroCentBetrag betragSub) {
+		betrag = betrag.subtract(betragSub);
+	}
+
+	public void addMoney(EuroCentBetrag betragAdd) {
+		betrag = betrag.add(betragAdd);
+	}
+
 }
