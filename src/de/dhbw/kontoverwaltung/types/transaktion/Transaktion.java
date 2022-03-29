@@ -2,7 +2,7 @@ package de.dhbw.kontoverwaltung.types.transaktion;
 
 import java.io.Serializable;
 
-import de.dhbw.kontoverwaltung.types.GeldBetrag;
+import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
 public abstract class Transaktion implements Serializable {
@@ -12,13 +12,13 @@ public abstract class Transaktion implements Serializable {
 	}
 
 	protected String transaktionId;
-	protected GeldBetrag betrag;
+	protected EuroCentBetrag betrag;
 
 	public String getTransaktionId() {
 		return transaktionId;
 	}
 
-	public GeldBetrag getBetrag() {
+	public EuroCentBetrag getBetrag() {
 		return betrag;
 	}
 

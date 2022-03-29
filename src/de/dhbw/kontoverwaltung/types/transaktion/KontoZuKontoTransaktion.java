@@ -1,6 +1,6 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
-import de.dhbw.kontoverwaltung.types.GeldBetrag;
+import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
 import de.dhbw.kontoverwaltung.types.Konto;
 
 public class KontoZuKontoTransaktion extends Transaktion {
@@ -8,7 +8,7 @@ public class KontoZuKontoTransaktion extends Transaktion {
 	private Konto sender;
 	private Konto empfaenger;
 
-	public KontoZuKontoTransaktion(Konto sender, Konto empfaenger, GeldBetrag betrag) {
+	public KontoZuKontoTransaktion(Konto sender, Konto empfaenger, EuroCentBetrag betrag) {
 		super();
 		this.sender = sender;
 		this.empfaenger = empfaenger;
