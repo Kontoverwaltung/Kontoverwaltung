@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.events.transfer;
+package de.dhbw.kontoverwaltung.events.transaktion;
 
 import de.dhbw.kontoverwaltung.repositories.KontoRepo;
 import de.dhbw.kontoverwaltung.repositories.returns.KontoReturn;

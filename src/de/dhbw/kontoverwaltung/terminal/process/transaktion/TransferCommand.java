@@ -1,8 +1,8 @@
-package de.dhbw.kontoverwaltung.terminal.process.transfer;
+package de.dhbw.kontoverwaltung.terminal.process.transaktion;
 
 import java.util.Arrays;
 
-import de.dhbw.kontoverwaltung.events.transfer.TransferEvents;
+import de.dhbw.kontoverwaltung.events.transaktion.TransferEvents;
 import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;

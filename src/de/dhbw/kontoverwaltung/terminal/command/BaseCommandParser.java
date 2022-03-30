@@ -4,12 +4,12 @@ import de.dhbw.kontoverwaltung.events.automat.AutomatEvents;
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
-import de.dhbw.kontoverwaltung.events.transfer.TransferEvents;
+import de.dhbw.kontoverwaltung.events.transaktion.TransferEvents;
 import de.dhbw.kontoverwaltung.terminal.process.automat.AutomatCommandProcessor;
 import de.dhbw.kontoverwaltung.terminal.process.bank.BankCommandProcessor;
 import de.dhbw.kontoverwaltung.terminal.process.konto.KontoCommandProcessor;
 import de.dhbw.kontoverwaltung.terminal.process.kunde.KundeCommandProcessor;
-import de.dhbw.kontoverwaltung.terminal.process.transfer.TransferCommand;
+import de.dhbw.kontoverwaltung.terminal.process.transaktion.TransferCommand;
 
 public class BaseCommandParser extends UppercaseCommandParser {
 
