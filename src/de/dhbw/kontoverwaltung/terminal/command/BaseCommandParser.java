@@ -9,7 +9,7 @@ import de.dhbw.kontoverwaltung.terminal.process.automat.AutomatCommandProcessor;
 import de.dhbw.kontoverwaltung.terminal.process.bank.BankCommandProcessor;
 import de.dhbw.kontoverwaltung.terminal.process.konto.KontoCommandProcessor;
 import de.dhbw.kontoverwaltung.terminal.process.kunde.KundeCommandProcessor;
-import de.dhbw.kontoverwaltung.terminal.process.transaktion.TransaktionCommand;
+import de.dhbw.kontoverwaltung.terminal.process.transaktion.TransferCommand;
 
 public class BaseCommandParser extends UppercaseCommandParser {
 
@@ -18,7 +18,7 @@ public class BaseCommandParser extends UppercaseCommandParser {
 		commands.put("KUNDE", new KundeCommandProcessor(kundeEvents));
 		commands.put("BANK", new BankCommandProcessor(bankEvents));
 		commands.put("KONTO", new KontoCommandProcessor(kontoEvents));
-		commands.put("TRANSAKTION", new TransaktionCommand(transferEvents));
+		commands.put("TRANSAKTION", new TransferCommand(transferEvents));
 		commands.put("AUTOMAT", new AutomatCommandProcessor(automatEvents));
 	}
 

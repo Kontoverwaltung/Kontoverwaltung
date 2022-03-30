@@ -7,21 +7,21 @@ import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class TransaktionCommand extends CommandParser {
+public class TransferCommand extends CommandParser {
 
 	private TransaktionEvents transaktionEvents;
 
-	public TransaktionCommand(TransaktionEvents transaktionEvents) {
+	public TransferCommand(TransaktionEvents transaktionEvents) {
 		super();
 		this.transaktionEvents = transaktionEvents;
 	}
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 4) {
-			String from = command.getStringAt(1);
-			String to = command.getStringAt(2);
-			String betrag = command.getStringAt(3);
+		if (command.argsSize() == 5) {
+			String from = command.getStringAt(2);
+			String to = command.getStringAt(3);
+			String betrag = command.getStringAt(4);
 			return transaktionEvents.transfer(from, to, betrag);
 		}
 		return CommandResult.usage(command.getCommandUpToPos(1), Arrays.asList("from", "to", "betrag"));
