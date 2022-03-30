@@ -50,7 +50,65 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 		boolean success = updateBetragFrom.isSuccessful() && updateBetragTo.isSuccessful();
 
 		if (success) {
-			return CommandResult.success("transfere complete");
+			return CommandResult.success("transfer complete");
+		} else {
+			return CommandResult.error("failed during transfer");
+		}
+	}
+
+	@Override
+	public CommandResult cashOut(String kontoString, String betragString) {
+		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoString);
+		if (!kontoReturn.isSuccessful()) {
+			return CommandResult.error("konto unknown");
+		}
+
+		EuroCentBetrag auszahlungsBetrag = EuroCentBetrag.parse(betragString);
+		if (auszahlungsBetrag == null) {
+			return CommandResult.error("betrag incorrect");
+		}
+
+		GiroKonto konto = kontoReturn.getInstance();
+
+		if (!konto.hatMehrGeldAls(auszahlungsBetrag)) {
+			return CommandResult.error("not enough money");
+		}
+
+		EuroCentBetrag kontoBetrag = konto.getBetrag();
+
+		EuroCentBetrag kontoBetragNeu = kontoBetrag.subtract(auszahlungsBetrag);
+
+		KontoReturn updateBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
+
+		if (updateBetrag.isSuccessful()) {
+			return CommandResult.success("transfer complete");
+		} else {
+			return CommandResult.error("failed during transfer");
+		}
+	}
+
+	@Override
+	public CommandResult cashIn(String kontoString, String betragString) {
+		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoString);
+		if (!kontoReturn.isSuccessful()) {
+			return CommandResult.error("konto unknown");
+		}
+
+		EuroCentBetrag einzahlungsBetrag = EuroCentBetrag.parse(betragString);
+		if (einzahlungsBetrag == null) {
+			return CommandResult.error("betrag incorrect");
+		}
+
+		GiroKonto konto = kontoReturn.getInstance();
+
+		EuroCentBetrag kontoBetrag = konto.getBetrag();
+
+		EuroCentBetrag kontoBetragNeu = kontoBetrag.add(einzahlungsBetrag);
+
+		KontoReturn updateBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
+
+		if (updateBetrag.isSuccessful()) {
+			return CommandResult.success("transfer complete");
 		} else {
 			return CommandResult.error("failed during transfer");
 		}
