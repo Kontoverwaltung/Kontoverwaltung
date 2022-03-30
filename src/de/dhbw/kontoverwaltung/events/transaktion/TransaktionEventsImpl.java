@@ -6,11 +6,11 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 
-public class TransferEventsImpl implements TransferEvents {
+public class TransaktionEventsImpl implements TransaktionEvents {
 
 	private KontoRepo kontoRepo;
 
-	public TransferEventsImpl(KontoRepo kontoRepo) {
+	public TransaktionEventsImpl(KontoRepo kontoRepo) {
 		this.kontoRepo = kontoRepo;
 	}
 
