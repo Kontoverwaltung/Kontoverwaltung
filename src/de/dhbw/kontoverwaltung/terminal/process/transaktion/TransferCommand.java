@@ -24,6 +24,6 @@ public class TransferCommand extends CommandParser {
 			String betrag = command.getStringAt(4);
 			return transaktionEvents.transfer(from, to, betrag);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(1), Arrays.asList("from", "to", "betrag"));
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("from", "to", "betrag"));
 	}
 }

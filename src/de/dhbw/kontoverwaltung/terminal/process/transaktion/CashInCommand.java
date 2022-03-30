@@ -23,6 +23,6 @@ public class CashInCommand extends CommandParser {
 			String betrag = command.getStringAt(3);
 			return transaktionEvents.cashIn(konto, betrag);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(1), Arrays.asList("konto", "betrag"));
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("konto", "betrag"));
 	}
 }
