@@ -10,7 +10,7 @@ import de.dhbw.kontoverwaltung.events.automat.AutomatEvents;
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
-import de.dhbw.kontoverwaltung.events.transfer.TransferEvents;
+import de.dhbw.kontoverwaltung.events.transaktion.TransaktionEvents;
 import de.dhbw.kontoverwaltung.terminal.command.BaseCommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
@@ -22,7 +22,7 @@ class CommandEventImplTest {
 	private KundeEvents kundeEvents;
 	private BankEvents bankEvents;
 	private KontoEvents kontoEvents;
-	private TransferEvents transferEvents;
+	private TransaktionEvents transferEvents;
 	private AutomatEvents automatEvents;
 
 	@BeforeEach

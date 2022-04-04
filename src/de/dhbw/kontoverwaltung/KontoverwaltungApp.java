@@ -8,8 +8,8 @@ import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
 import de.dhbw.kontoverwaltung.events.konto.KontoEventsImpl;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEventsImpl;
-import de.dhbw.kontoverwaltung.events.transfer.TransferEvents;
-import de.dhbw.kontoverwaltung.events.transfer.TransferEventsImpl;
+import de.dhbw.kontoverwaltung.events.transaktion.TransaktionEvents;
+import de.dhbw.kontoverwaltung.events.transaktion.TransaktionEventsImpl;
 import de.dhbw.kontoverwaltung.repositories.AutomatRepo;
 import de.dhbw.kontoverwaltung.repositories.AutomatRepoImpl;
 import de.dhbw.kontoverwaltung.repositories.BankRepo;
@@ -34,13 +34,13 @@ public class KontoverwaltungApp {
 		KundeRepo kundeRepo = new KundeRepoImpl();
 		AutomatRepo automatRepo = new AutomatRepoImpl();
 
-		TransferEvents transferEvents = new TransferEventsImpl(kontoRepo);
+		TransaktionEvents transaktionEvents = new TransaktionEventsImpl(kontoRepo);
 		KundeEvents kundeEvents = new KundeEventsImpl(kundeRepo);
 		BankEvents bankEvents = new BankEventsImpl(bankRepo);
 		KontoEvents kontoEvents = new KontoEventsImpl(kontoRepo, bankRepo, kundeRepo);
 		AutomatEvents automatEvents = new AutomatEventsImpl(automatRepo);
 
-		BaseCommandParser commandParser = new BaseCommandParser(kundeEvents, bankEvents, kontoEvents, transferEvents, automatEvents);
+		BaseCommandParser commandParser = new BaseCommandParser(kundeEvents, bankEvents, kontoEvents, transaktionEvents, automatEvents);
 
 		TerminalHandler terminalHandler = new TerminalHandler(commandParser);
 		terminalHandler.start();
