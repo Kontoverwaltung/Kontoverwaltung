@@ -14,4 +14,6 @@ public interface KontoEvents {
 
 	public CommandResult changeBank(String kontoId, String newBank);
 	
+	public CommandResult getKontoauszug(String kontoId);
+	
 }

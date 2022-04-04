@@ -24,4 +24,10 @@ public class EinzahlungTransaktion extends Transaktion {
 		return konto;
 	}
 
+	@Override
+	public String toString() {
+		return "EinzahlungTransaktion [Automat=" + automat + ", Konto=" + konto + "]";
+	}
+
+	
 }

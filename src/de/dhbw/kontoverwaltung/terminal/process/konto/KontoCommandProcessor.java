@@ -12,6 +12,7 @@ public class KontoCommandProcessor extends UppercaseCommandParser {
 		commands.put("DELETE", new DeleteKontoCommand(kontoEvents));
 		commands.put("CHANGEPIN", new ChangePinKontoCommand(kontoEvents));
 		commands.put("CHANGEBANK", new ChangeBankKontoCommand(kontoEvents));
+		commands.put("GETHISTORY", new GetHistoryKontoCommand(kontoEvents));
 	}
 
 }

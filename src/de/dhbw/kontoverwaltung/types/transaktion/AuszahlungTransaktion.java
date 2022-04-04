@@ -24,4 +24,8 @@ public class AuszahlungTransaktion extends Transaktion {
 		return konto;
 	}
 
+	@Override
+	public String toString() {
+		return "AuszahlungTransaktion [Automat=" + automat + ", Konto=" + konto + "]";
+	}
 }

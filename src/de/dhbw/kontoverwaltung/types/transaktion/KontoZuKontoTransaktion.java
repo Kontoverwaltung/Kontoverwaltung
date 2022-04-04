@@ -23,4 +23,11 @@ public class KontoZuKontoTransaktion extends Transaktion {
 		return empfaenger;
 	}
 
+	@Override
+	public String toString() {
+		return "KontoZuKontoTransaktion [Sender=" + sender + ", Empfaenger=" + empfaenger + "]";
+	}
+	
+	
+
 }

@@ -1,7 +1,10 @@
 package de.dhbw.kontoverwaltung.types;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import de.dhbw.kontoverwaltung.types.transaktion.Transaktion;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
 public class GiroKonto implements Serializable {
@@ -11,6 +14,7 @@ public class GiroKonto implements Serializable {
 	private Person inhaber;
 	private Pin pin;
 	private EuroCentBetrag betrag;
+	private List<Transaktion> history = new ArrayList<>();
 
 	public GiroKonto(Bank bank, Person inhaber, Pin pin) {
 		super();
@@ -51,6 +55,14 @@ public class GiroKonto implements Serializable {
 
 	public Person getInhaber() {
 		return inhaber;
+	}
+	
+	public List<Transaktion> getHistory() {
+		return history;
+	}
+	
+	public void addHistoryEntry(Transaktion transaktion) {
+		this.history.add(transaktion);
 	}
 
 	@Override

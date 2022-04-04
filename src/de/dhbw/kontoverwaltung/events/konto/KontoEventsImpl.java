@@ -12,6 +12,7 @@ import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 import de.dhbw.kontoverwaltung.types.Person;
 import de.dhbw.kontoverwaltung.types.Pin;
+import de.dhbw.kontoverwaltung.types.transaktion.Transaktion;
 
 public class KontoEventsImpl implements KontoEvents {
 
@@ -101,11 +102,27 @@ public class KontoEventsImpl implements KontoEvents {
 			return CommandResult.error("failed to find new bank");
 		}
 
-		KontoReturn pinUpdateReturn = kontoRepo.updateBank(konto, newBankReturn.getInstance());
-		if (pinUpdateReturn.isSuccessful()) {
+		KontoReturn updateReturn = kontoRepo.updateBank(konto, newBankReturn.getInstance());
+		if (updateReturn.isSuccessful()) {
 			return CommandResult.success("bank changed");
 		}
 		return CommandResult.error("failed to change bank");
+	}
+
+	@Override
+	public CommandResult getKontoauszug(String kontoId) {
+		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoId);
+		if (!kontoReturn.isSuccessful()) {
+			return CommandResult.error("failed to load konto");
+		}
+
+		GiroKonto konto = kontoReturn.getInstance();
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Transaktion transaktion : konto.getHistory()) {
+			stringBuilder.append(transaktion.toString());
+		}
+		return CommandResult.success(stringBuilder.toString());
 	}
 
 }
