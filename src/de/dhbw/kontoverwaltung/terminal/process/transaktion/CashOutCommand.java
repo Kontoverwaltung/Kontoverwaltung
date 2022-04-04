@@ -18,12 +18,13 @@ public class CashOutCommand extends CommandParser {
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 5) {
-			String konto = command.getStringAt(2);
-			String betrag = command.getStringAt(3);
-			String pin = command.getStringAt(4);
-			return transaktionEvents.cashOut(konto, betrag, pin);
+		if (command.argsSize() == 6) {
+			String automat = command.getStringAt(2);
+			String konto = command.getStringAt(3);
+			String betrag = command.getStringAt(4);
+			String pin = command.getStringAt(5);
+			return transaktionEvents.cashOut(automat, konto, betrag, pin);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("konto", "betrag", "pin"));
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("automat", "konto", "betrag", "pin"));
 	}
 }

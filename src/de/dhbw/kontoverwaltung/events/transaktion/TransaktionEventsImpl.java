@@ -1,17 +1,22 @@
 package de.dhbw.kontoverwaltung.events.transaktion;
 
+import de.dhbw.kontoverwaltung.repositories.AutomatRepo;
 import de.dhbw.kontoverwaltung.repositories.KontoRepo;
+import de.dhbw.kontoverwaltung.repositories.returns.AutomatReturn;
 import de.dhbw.kontoverwaltung.repositories.returns.KontoReturn;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
+import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 
 public class TransaktionEventsImpl implements TransaktionEvents {
 
 	private KontoRepo kontoRepo;
+	private AutomatRepo automatRepo;
 
-	public TransaktionEventsImpl(KontoRepo kontoRepo) {
+	public TransaktionEventsImpl(KontoRepo kontoRepo, AutomatRepo automatRepo) {
 		this.kontoRepo = kontoRepo;
+		this.automatRepo = automatRepo;
 	}
 
 	@Override
@@ -57,7 +62,12 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 	}
 
 	@Override
-	public CommandResult cashOut(String kontoString, String betragString, String pin) {
+	public CommandResult cashOut(String automatString, String kontoString, String betragString, String pin) {
+		AutomatReturn automatReturn = automatRepo.getAutomatById(automatString);
+		if(!automatReturn.isSuccessful()) {
+			return CommandResult.error("automat unknown");
+		}
+		
 		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoString);
 		if (!kontoReturn.isSuccessful()) {
 			return CommandResult.error("konto unknown");
@@ -68,6 +78,7 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 			return CommandResult.error("betrag incorrect");
 		}
 
+		GeldAusgabeAutomat automat = automatReturn.getInstance();
 		GiroKonto konto = kontoReturn.getInstance();
 		
 		if(!konto.getPin().isCorrectPin(pin)) {
@@ -75,16 +86,22 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 		}
 
 		if (!konto.hatMehrGeldAls(auszahlungsBetrag)) {
-			return CommandResult.error("not enough money");
+			return CommandResult.error("not enough money on account");
 		}
+		
+		if (!automat.hatMehrGeldAls(auszahlungsBetrag)) {
+			return CommandResult.error("not enough money in machine");
+		}
+		
+		EuroCentBetrag automatBetrag = automat.getBetrag();
+		EuroCentBetrag automatBetragNeu = automatBetrag.subtract(auszahlungsBetrag);
+		AutomatReturn updateAutomatBetrag = automatRepo.updateBetrag(automat, automatBetragNeu);
 
 		EuroCentBetrag kontoBetrag = konto.getBetrag();
-
 		EuroCentBetrag kontoBetragNeu = kontoBetrag.subtract(auszahlungsBetrag);
+		KontoReturn updateKontoBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
 
-		KontoReturn updateBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
-
-		if (updateBetrag.isSuccessful()) {
+		if (updateAutomatBetrag.isSuccessful() && updateKontoBetrag.isSuccessful()) {
 			return CommandResult.success("transfer complete");
 		} else {
 			return CommandResult.error("failed during transfer");
@@ -92,7 +109,12 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 	}
 
 	@Override
-	public CommandResult cashIn(String kontoString, String betragString) {
+	public CommandResult cashIn(String automatString, String kontoString, String betragString) {
+		AutomatReturn automatReturn = automatRepo.getAutomatById(automatString);
+		if(!automatReturn.isSuccessful()) {
+			return CommandResult.error("automat unknown");
+		}
+		
 		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoString);
 		if (!kontoReturn.isSuccessful()) {
 			return CommandResult.error("konto unknown");
@@ -103,15 +125,18 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 			return CommandResult.error("betrag incorrect");
 		}
 
+		GeldAusgabeAutomat automat = automatReturn.getInstance();
 		GiroKonto konto = kontoReturn.getInstance();
 
+		EuroCentBetrag automatBetrag = automat.getBetrag();
+		EuroCentBetrag automatBetragNeu = automatBetrag.add(einzahlungsBetrag);
+		AutomatReturn updateAutomatBetrag = automatRepo.updateBetrag(automat, automatBetragNeu);
+		
 		EuroCentBetrag kontoBetrag = konto.getBetrag();
-
 		EuroCentBetrag kontoBetragNeu = kontoBetrag.add(einzahlungsBetrag);
-
 		KontoReturn updateBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
 
-		if (updateBetrag.isSuccessful()) {
+		if (updateAutomatBetrag.isSuccessful() && updateBetrag.isSuccessful()) {
 			return CommandResult.success("transfer complete");
 		} else {
 			return CommandResult.error("failed during transfer");
