@@ -118,11 +118,7 @@ public class KontoEventsImpl implements KontoEvents {
 
 		GiroKonto konto = kontoReturn.getInstance();
 		
-		StringBuilder stringBuilder = new StringBuilder();
-		for (Transaktion transaktion : konto.getHistory()) {
-			stringBuilder.append(transaktion.toString());
-		}
-		return CommandResult.success(stringBuilder.toString());
+		return CommandResult.success(konto.getHistoryString());
 	}
 
 }

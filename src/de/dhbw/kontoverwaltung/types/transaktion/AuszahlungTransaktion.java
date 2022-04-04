@@ -26,6 +26,9 @@ public class AuszahlungTransaktion extends Transaktion {
 
 	@Override
 	public String toString() {
-		return "AuszahlungTransaktion [Automat=" + automat + ", Konto=" + konto + "]";
+		return "AuszahlungTransaktion [Automat=" + automat + ", KontoID=" + konto.getKontoId() + ", TransaktionID=" + transaktionId
+				+ ", Betrag=" + betrag + "]";
 	}
+
+	
 }

@@ -8,6 +8,7 @@ import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 import de.dhbw.kontoverwaltung.types.Person;
 import de.dhbw.kontoverwaltung.types.Pin;
+import de.dhbw.kontoverwaltung.types.transaktion.Transaktion;
 
 public class KontoRepoImpl implements KontoRepo {
 
@@ -55,6 +56,14 @@ public class KontoRepoImpl implements KontoRepo {
 	public KontoReturn updateBank(GiroKonto konto, Bank bank) {
 		kontoDatabase.remove(konto.getKontoId());
 		konto.setBank(bank);
+		kontoDatabase.set(konto.getKontoId(), konto);
+		return new KontoReturn(true, konto);
+	}
+
+	@Override
+	public KontoReturn addHistoryEntry(GiroKonto konto, Transaktion transaktion) {
+		kontoDatabase.remove(konto.getKontoId());
+		konto.addHistoryEntry(transaktion);
 		kontoDatabase.set(konto.getKontoId(), konto);
 		return new KontoReturn(true, konto);
 	}

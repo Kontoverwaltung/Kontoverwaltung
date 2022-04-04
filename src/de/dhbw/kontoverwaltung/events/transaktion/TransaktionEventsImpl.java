@@ -8,6 +8,10 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
 import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
+import de.dhbw.kontoverwaltung.types.transaktion.AuszahlungTransaktion;
+import de.dhbw.kontoverwaltung.types.transaktion.EinzahlungTransaktion;
+import de.dhbw.kontoverwaltung.types.transaktion.KontoZuKontoTransaktion;
+import de.dhbw.kontoverwaltung.types.transaktion.Transaktion;
 
 public class TransaktionEventsImpl implements TransaktionEvents {
 
@@ -51,10 +55,14 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 
 		KontoReturn updateBetragFrom = kontoRepo.updateBetrag(from, fromBetragNeu);
 		KontoReturn updateBetragTo = kontoRepo.updateBetrag(to, toBetragNeu);
+		
+		Transaktion transaktion = new KontoZuKontoTransaktion(from, to, betrag);
 
 		boolean success = updateBetragFrom.isSuccessful() && updateBetragTo.isSuccessful();
 
 		if (success) {
+			kontoRepo.addHistoryEntry(from, transaktion);
+			kontoRepo.addHistoryEntry(to, transaktion);
 			return CommandResult.success("transfer complete");
 		} else {
 			return CommandResult.error("failed during transfer");
@@ -101,7 +109,10 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 		EuroCentBetrag kontoBetragNeu = kontoBetrag.subtract(auszahlungsBetrag);
 		KontoReturn updateKontoBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
 
+		Transaktion transaktion = new AuszahlungTransaktion(automat, konto, auszahlungsBetrag);
+		
 		if (updateAutomatBetrag.isSuccessful() && updateKontoBetrag.isSuccessful()) {
+			kontoRepo.addHistoryEntry(konto, transaktion);
 			return CommandResult.success("transfer complete");
 		} else {
 			return CommandResult.error("failed during transfer");
@@ -136,7 +147,10 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 		EuroCentBetrag kontoBetragNeu = kontoBetrag.add(einzahlungsBetrag);
 		KontoReturn updateBetrag = kontoRepo.updateBetrag(konto, kontoBetragNeu);
 
+		Transaktion transaktion = new EinzahlungTransaktion(automat, konto, einzahlungsBetrag);
+		
 		if (updateAutomatBetrag.isSuccessful() && updateBetrag.isSuccessful()) {
+			kontoRepo.addHistoryEntry(konto, transaktion);
 			return CommandResult.success("transfer complete");
 		} else {
 			return CommandResult.error("failed during transfer");

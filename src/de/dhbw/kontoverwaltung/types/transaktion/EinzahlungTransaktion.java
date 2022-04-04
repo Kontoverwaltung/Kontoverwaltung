@@ -26,8 +26,10 @@ public class EinzahlungTransaktion extends Transaktion {
 
 	@Override
 	public String toString() {
-		return "EinzahlungTransaktion [Automat=" + automat + ", Konto=" + konto + "]";
+		return "EinzahlungTransaktion [Automat=" + automat + ", KontoID=" + konto.getKontoId() + ", TransaktionID=" + transaktionId
+				+ ", Betrag=" + betrag + "]";
 	}
+
 
 	
 }

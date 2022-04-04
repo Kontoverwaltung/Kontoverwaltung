@@ -56,18 +56,19 @@ public class GiroKonto implements Serializable {
 	public Person getInhaber() {
 		return inhaber;
 	}
-	
-	public List<Transaktion> getHistory() {
-		return history;
-	}
-	
-	public void addHistoryEntry(Transaktion transaktion) {
-		this.history.add(transaktion);
+
+	public String getHistoryString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		
+		for (Transaktion transaktion : history) {
+			stringBuilder.append(transaktion.toString());
+			stringBuilder.append("\n");
+		}
+		return stringBuilder.toString();
 	}
 
-	@Override
-	public String toString() {
-		return "Konto [Bank=" + bank + ", KontoID=" + kontoId + ", Inhaber=" + inhaber + ", Pin=" + pin + ", Betrag=" + betrag + "]";
+	public void addHistoryEntry(Transaktion transaktion) {
+		this.history.add(transaktion);
 	}
 
 	public boolean hatMehrGeldAls(EuroCentBetrag betragCheck) {
@@ -79,5 +80,12 @@ public class GiroKonto implements Serializable {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Konto [Bank=" + bank + ", KontoID=" + kontoId + ", Inhaber=" + inhaber + ", Pin=" + pin + ", Betrag="
+				+ betrag + ", Kontoauszug=" + getHistoryString() + "]";
+	}
+
 
 }
