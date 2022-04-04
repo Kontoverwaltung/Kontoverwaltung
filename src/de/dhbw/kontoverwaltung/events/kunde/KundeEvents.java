@@ -6,7 +6,7 @@ public interface KundeEvents {
 
 	public CommandResult getKunde(String kundenId);
 
-	public CommandResult createNewKunde(String bankName, String vorname, String nachname);
+	public CommandResult createNewKunde(String vorname, String nachname);
 
 	public CommandResult deleteKunde(String kundenId);
 

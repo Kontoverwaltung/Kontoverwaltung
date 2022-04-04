@@ -39,14 +39,13 @@ class CommandEventImplTest {
 
 	@Test
 	void testCreatePerson() {
-		// KUNDE CREATE {bankName} {Vorname} {Nachname} => personId
-		SplittedCommand testCommand = new SplittedCommand("kunde create Volksbank-Bruchsal Peter Abriss", " ");
+		// KUNDE CREATE {Vorname} {Nachname} => personId
+		SplittedCommand testCommand = new SplittedCommand("kunde create Peter Abriss", " ");
 
 		// prepare
 		kundeEvents = new KundeEvents() {
 			@Override
-			public CommandResult createNewKunde(String bankName, String vorname, String nachname) {
-				assertThat(bankName, is("Volksbank-Bruchsal"));
+			public CommandResult createNewKunde(String vorname, String nachname) {
 				assertThat(vorname, is("Peter"));
 				assertThat(nachname, is("Abriss"));
 

@@ -1,17 +1,17 @@
 package de.dhbw.kontoverwaltung.repositories.returns;
 
-import de.dhbw.kontoverwaltung.types.personen.Kunde;
+import de.dhbw.kontoverwaltung.types.Person;
 
 public class KundeReturn extends Return {
 
-	private Kunde instance;
+	private Person instance;
 
-	public KundeReturn(boolean successful, Kunde instance) {
+	public KundeReturn(boolean successful, Person instance) {
 		super(successful);
 		this.instance = instance;
 	}
 
-	public Kunde getInstance() {
+	public Person getInstance() {
 		return instance;
 	}
 }

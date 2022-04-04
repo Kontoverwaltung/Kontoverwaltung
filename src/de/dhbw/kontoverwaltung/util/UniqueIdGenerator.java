@@ -1,12 +1,16 @@
 package de.dhbw.kontoverwaltung.util;
 
-import java.util.UUID;
-
 public class UniqueIdGenerator {
 
+	private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
 	public static String next() {
-		String result = UUID.randomUUID().toString();
-		return result;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 9; i++) {
+			int index = (int) (Math.random() * ALPHABET.length());
+			sb.append(ALPHABET.charAt(index));
+		}
+		return sb.toString();
 	}
 
 }

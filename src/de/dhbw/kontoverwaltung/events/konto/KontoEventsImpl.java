@@ -10,8 +10,8 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.terminal.command.results.ObjectToStringCommandResult;
 import de.dhbw.kontoverwaltung.types.Bank;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
+import de.dhbw.kontoverwaltung.types.Person;
 import de.dhbw.kontoverwaltung.types.Pin;
-import de.dhbw.kontoverwaltung.types.personen.Person;
 
 public class KontoEventsImpl implements KontoEvents {
 
@@ -85,6 +85,27 @@ public class KontoEventsImpl implements KontoEvents {
 			return CommandResult.success("pin changed");
 		}
 		return CommandResult.error("failed to change pin");
+	}
+
+	@Override
+	public CommandResult changeBank(String kontoId, String newBank) {
+		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoId);
+		if (!kontoReturn.isSuccessful()) {
+			return CommandResult.error("failed to load konto");
+		}
+
+		GiroKonto konto = kontoReturn.getInstance();
+
+		BankReturn newBankReturn = bankRepo.getBankByName(newBank);
+		if (!newBankReturn.isSuccessful()) {
+			return CommandResult.error("failed to find new bank");
+		}
+
+		KontoReturn pinUpdateReturn = kontoRepo.updateBank(konto, newBankReturn.getInstance());
+		if (pinUpdateReturn.isSuccessful()) {
+			return CommandResult.success("bank changed");
+		}
+		return CommandResult.error("failed to change bank");
 	}
 
 }

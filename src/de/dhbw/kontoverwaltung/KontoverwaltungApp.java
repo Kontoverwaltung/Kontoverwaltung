@@ -35,7 +35,7 @@ public class KontoverwaltungApp {
 		AutomatRepo automatRepo = new AutomatRepoImpl();
 
 		TransferEvents transferEvents = new TransferEventsImpl(kontoRepo);
-		KundeEvents kundeEvents = new KundeEventsImpl(bankRepo, kundeRepo);
+		KundeEvents kundeEvents = new KundeEventsImpl(kundeRepo);
 		BankEvents bankEvents = new BankEventsImpl(bankRepo);
 		KontoEvents kontoEvents = new KontoEventsImpl(kontoRepo, bankRepo, kundeRepo);
 		AutomatEvents automatEvents = new AutomatEventsImpl(automatRepo);

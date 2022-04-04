@@ -18,12 +18,11 @@ public class CreateKundeCommand extends CommandParser {
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 5) {
-			String bankName = command.getStringAt(2);
-			String vorname = command.getStringAt(3);
-			String nachname = command.getStringAt(4);
-			return kundeEvents.createNewKunde(bankName, vorname, nachname);
+		if (command.argsSize() == 4) {
+			String vorname = command.getStringAt(2);
+			String nachname = command.getStringAt(3);
+			return kundeEvents.createNewKunde(vorname, nachname);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("bankname", "vorname", "nachname"));
+		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("vorname", "nachname"));
 	}
 }

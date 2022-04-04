@@ -2,7 +2,6 @@ package de.dhbw.kontoverwaltung.types;
 
 import java.io.Serializable;
 
-import de.dhbw.kontoverwaltung.types.personen.Person;
 import de.dhbw.kontoverwaltung.util.UniqueIdGenerator;
 
 public class GiroKonto implements Serializable {
@@ -40,6 +39,10 @@ public class GiroKonto implements Serializable {
 
 	public Bank getBank() {
 		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 	public String getKontoId() {

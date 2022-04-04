@@ -12,4 +12,6 @@ public interface KontoEvents {
 
 	public CommandResult changePin(String kontoId, String oldPin, String newPin);
 
+	public CommandResult changeBank(String kontoId, String newBank);
+	
 }
