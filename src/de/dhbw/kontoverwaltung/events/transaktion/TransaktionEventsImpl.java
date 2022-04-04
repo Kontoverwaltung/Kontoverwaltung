@@ -57,7 +57,7 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 	}
 
 	@Override
-	public CommandResult cashOut(String kontoString, String betragString) {
+	public CommandResult cashOut(String kontoString, String betragString, String pin) {
 		KontoReturn kontoReturn = kontoRepo.getKontoById(kontoString);
 		if (!kontoReturn.isSuccessful()) {
 			return CommandResult.error("konto unknown");
@@ -69,6 +69,10 @@ public class TransaktionEventsImpl implements TransaktionEvents {
 		}
 
 		GiroKonto konto = kontoReturn.getInstance();
+		
+		if(!konto.getPin().isCorrectPin(pin)) {
+			return CommandResult.error("pin is incorrect");
+		}
 
 		if (!konto.hatMehrGeldAls(auszahlungsBetrag)) {
 			return CommandResult.error("not enough money");
