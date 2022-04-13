@@ -55,10 +55,6 @@ public class CommandResult {
 		return error(stringBuilder.toString());
 	}
 
-	public static CommandResult notFound(String name) {
-		return error(name + " not found");
-	}
-
 	public boolean isSuccessful() {
 		return successful;
 	}
