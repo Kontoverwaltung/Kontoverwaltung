@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal.process.konto;
+package de.dhbw.kontoverwaltung.terminal.process.girokonto;
 
 import de.dhbw.kontoverwaltung.events.girokonto.GiroKontoEvents;
 import de.dhbw.kontoverwaltung.terminal.command.UppercaseCommandParser;

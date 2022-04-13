@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal.process.automat;
+package de.dhbw.kontoverwaltung.terminal.process.geldausgabeautomat;
 
 import de.dhbw.kontoverwaltung.events.geldausgabeautomat.GeldAusgabeAutomatEvents;
 import de.dhbw.kontoverwaltung.terminal.command.UppercaseCommandParser;

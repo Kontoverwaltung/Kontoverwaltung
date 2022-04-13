@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal.process.automat;
+package de.dhbw.kontoverwaltung.terminal.process.geldausgabeautomat;
 
 import java.util.Arrays;
 

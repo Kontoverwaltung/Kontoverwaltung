@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal.process.konto;
+package de.dhbw.kontoverwaltung.terminal.process.girokonto;
 
 import java.util.Arrays;
 
@@ -7,7 +7,7 @@ import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class GetKontoCommand extends CommandParser {
+public class GetHistoryKontoCommand extends CommandParser {
 
 	private static final int COMMAND_HELP_CUT = 2;
 	private static final int ARG_KONTO = 2;
@@ -15,7 +15,7 @@ public class GetKontoCommand extends CommandParser {
 	
 	private GiroKontoEvents giroKontoEvents;
 
-	public GetKontoCommand(GiroKontoEvents giroKontoEvents) {
+	public GetHistoryKontoCommand(GiroKontoEvents giroKontoEvents) {
 		super();
 		this.giroKontoEvents = giroKontoEvents;
 	}
@@ -24,7 +24,7 @@ public class GetKontoCommand extends CommandParser {
 	public CommandResult execute(SplittedCommand command) {
 		if (command.argsSize() == EXPECTED_LENGTH) {
 			String kontoId = command.getStringAt(ARG_KONTO);
-			return giroKontoEvents.getGiroKonto(kontoId);
+			return giroKontoEvents.getKontoauszug(kontoId);
 		}
 		return CommandResult.usage(command.getCommandUpToPos(COMMAND_HELP_CUT), Arrays.asList("kontoid"));
 	}

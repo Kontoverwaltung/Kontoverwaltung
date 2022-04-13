@@ -1,4 +1,4 @@
-package de.dhbw.kontoverwaltung.terminal.process.konto;
+package de.dhbw.kontoverwaltung.terminal.process.girokonto;
 
 import java.util.Arrays;
 
