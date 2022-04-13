@@ -59,7 +59,7 @@ public class GiroKonto implements Serializable {
 
 	public String getHistoryString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		
+
 		for (Transaktion transaktion : history) {
 			stringBuilder.append(transaktion.toString());
 			stringBuilder.append("\n");
@@ -86,6 +86,5 @@ public class GiroKonto implements Serializable {
 		return "Konto [Bank=" + bank + ", KontoID=" + kontoId + ", Inhaber=" + inhaber + ", Pin=" + pin + ", Betrag="
 				+ betrag + ", Kontoauszug=" + getHistoryString() + "]";
 	}
-
 
 }

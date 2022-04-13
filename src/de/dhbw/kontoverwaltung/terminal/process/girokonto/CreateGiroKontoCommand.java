@@ -1,19 +1,19 @@
-package de.dhbw.kontoverwaltung.terminal.process.konto;
+package de.dhbw.kontoverwaltung.terminal.process.girokonto;
 
 import java.util.Arrays;
 
-import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
+import de.dhbw.kontoverwaltung.events.girokonto.GiroKontoEvents;
 import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class CreateKontoCommand extends CommandParser {
+public class CreateGiroKontoCommand extends CommandParser {
 
-	private KontoEvents kontoEvents;
+	private GiroKontoEvents giroKontoEvents;
 
-	public CreateKontoCommand(KontoEvents kontoEvents) {
+	public CreateGiroKontoCommand(GiroKontoEvents giroKontoEvents) {
 		super();
-		this.kontoEvents = kontoEvents;
+		this.giroKontoEvents = giroKontoEvents;
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class CreateKontoCommand extends CommandParser {
 			String bankName = command.getStringAt(2);
 			String kundenId = command.getStringAt(3);
 			String pin = command.getStringAt(4);
-			return kontoEvents.createNewKonto(bankName, kundenId, pin);
+			return giroKontoEvents.createNewGiroKonto(bankName, kundenId, pin);
 		}
 		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("bankname", "kundenid", "pin"));
 	}

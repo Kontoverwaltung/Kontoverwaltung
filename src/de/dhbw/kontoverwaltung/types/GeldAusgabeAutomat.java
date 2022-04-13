@@ -7,7 +7,7 @@ public class GeldAusgabeAutomat implements Serializable {
 	private String automatId;
 	private EuroCentBetrag betrag;
 
-	public GeldAusgabeAutomat(String automatId,EuroCentBetrag betrag) {
+	public GeldAusgabeAutomat(String automatId, EuroCentBetrag betrag) {
 		super();
 		this.automatId = automatId;
 		this.betrag = betrag;
@@ -16,7 +16,7 @@ public class GeldAusgabeAutomat implements Serializable {
 	public String getAutomatId() {
 		return automatId;
 	}
-	
+
 	public EuroCentBetrag getBetrag() {
 		return betrag;
 	}
@@ -24,7 +24,7 @@ public class GeldAusgabeAutomat implements Serializable {
 	public void setBetrag(EuroCentBetrag betrag) {
 		this.betrag = betrag;
 	}
-	
+
 	public boolean hatMehrGeldAls(EuroCentBetrag betragCheck) {
 		if (betrag.getEuro() < betragCheck.getEuro()) {
 			return false;
@@ -39,5 +39,5 @@ public class GeldAusgabeAutomat implements Serializable {
 	public String toString() {
 		return "Automat [AutomatID=" + automatId + "]";
 	}
-	
+
 }

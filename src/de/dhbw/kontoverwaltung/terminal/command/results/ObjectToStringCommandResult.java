@@ -7,7 +7,7 @@ public class ObjectToStringCommandResult extends CommandResult {
 	}
 
 	private static String createInfo(Object object) {
-		if(object != null) {
+		if (object != null) {
 			return object.toString();
 		} else {
 			return "object is null";

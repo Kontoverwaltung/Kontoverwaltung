@@ -1,6 +1,7 @@
 package de.dhbw.kontoverwaltung.repositories;
 
 import de.dhbw.kontoverwaltung.repositories.returns.BankReturn;
+import de.dhbw.kontoverwaltung.types.Bank;
 
 public interface BankRepo {
 
@@ -8,6 +9,6 @@ public interface BankRepo {
 
 	public BankReturn addBank(String bankName);
 
-	public BankReturn removeBankByName(String bankName);
+	public BankReturn removeBank(Bank bank);
 
 }

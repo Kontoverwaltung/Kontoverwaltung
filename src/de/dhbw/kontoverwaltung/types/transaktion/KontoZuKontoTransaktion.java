@@ -25,11 +25,8 @@ public class KontoZuKontoTransaktion extends Transaktion {
 
 	@Override
 	public String toString() {
-		return "KontoZuKontoTransaktion [SenderID=" + sender.getKontoId() + ", EmpfaengerID=" + empfaenger.getKontoId() + ", TransaktionID="
-				+ transaktionId + ", Betrag=" + betrag + "]";
+		return "KontoZuKontoTransaktion [SenderID=" + sender.getKontoId() + ", EmpfaengerID=" + empfaenger.getKontoId()
+				+ ", TransaktionID=" + transaktionId + ", Betrag=" + betrag + "]";
 	}
-
-	
-	
 
 }

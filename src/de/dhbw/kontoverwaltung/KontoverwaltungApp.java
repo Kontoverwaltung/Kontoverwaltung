@@ -1,21 +1,21 @@
 package de.dhbw.kontoverwaltung;
 
-import de.dhbw.kontoverwaltung.events.automat.AutomatEvents;
-import de.dhbw.kontoverwaltung.events.automat.AutomatEventsImpl;
 import de.dhbw.kontoverwaltung.events.bank.BankEvents;
 import de.dhbw.kontoverwaltung.events.bank.BankEventsImpl;
-import de.dhbw.kontoverwaltung.events.konto.KontoEvents;
-import de.dhbw.kontoverwaltung.events.konto.KontoEventsImpl;
+import de.dhbw.kontoverwaltung.events.geldausgabeautomat.GeldAusgabeAutomatEvents;
+import de.dhbw.kontoverwaltung.events.geldausgabeautomat.GeldAusgabeAutomatEventsImpl;
+import de.dhbw.kontoverwaltung.events.girokonto.GiroKontoEvents;
+import de.dhbw.kontoverwaltung.events.girokonto.GiroKontoEventsImpl;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEvents;
 import de.dhbw.kontoverwaltung.events.kunde.KundeEventsImpl;
 import de.dhbw.kontoverwaltung.events.transaktion.TransaktionEvents;
 import de.dhbw.kontoverwaltung.events.transaktion.TransaktionEventsImpl;
-import de.dhbw.kontoverwaltung.repositories.AutomatRepo;
-import de.dhbw.kontoverwaltung.repositories.AutomatRepoImpl;
 import de.dhbw.kontoverwaltung.repositories.BankRepo;
 import de.dhbw.kontoverwaltung.repositories.BankRepoImpl;
-import de.dhbw.kontoverwaltung.repositories.KontoRepo;
-import de.dhbw.kontoverwaltung.repositories.KontoRepoImpl;
+import de.dhbw.kontoverwaltung.repositories.GeldAusgabeAutomatRepo;
+import de.dhbw.kontoverwaltung.repositories.GeldAusgabeAutomatRepoImpl;
+import de.dhbw.kontoverwaltung.repositories.GiroKontoRepo;
+import de.dhbw.kontoverwaltung.repositories.GiroKontoRepoImpl;
 import de.dhbw.kontoverwaltung.repositories.KundeRepo;
 import de.dhbw.kontoverwaltung.repositories.KundeRepoImpl;
 import de.dhbw.kontoverwaltung.terminal.TerminalHandler;
@@ -29,18 +29,19 @@ public class KontoverwaltungApp {
 	}
 
 	private void start() {
-		KontoRepo kontoRepo = new KontoRepoImpl();
+		GiroKontoRepo giroKontoRepo = new GiroKontoRepoImpl();
 		BankRepo bankRepo = new BankRepoImpl();
 		KundeRepo kundeRepo = new KundeRepoImpl();
-		AutomatRepo automatRepo = new AutomatRepoImpl();
+		GeldAusgabeAutomatRepo geldAusgabeAutomatRepo = new GeldAusgabeAutomatRepoImpl();
 
-		TransaktionEvents transaktionEvents = new TransaktionEventsImpl(kontoRepo, automatRepo);
+		TransaktionEvents transaktionEvents = new TransaktionEventsImpl(giroKontoRepo, geldAusgabeAutomatRepo);
 		KundeEvents kundeEvents = new KundeEventsImpl(kundeRepo);
 		BankEvents bankEvents = new BankEventsImpl(bankRepo);
-		KontoEvents kontoEvents = new KontoEventsImpl(kontoRepo, bankRepo, kundeRepo);
-		AutomatEvents automatEvents = new AutomatEventsImpl(automatRepo);
+		GiroKontoEvents giroKontoEvents = new GiroKontoEventsImpl(giroKontoRepo, bankRepo, kundeRepo);
+		GeldAusgabeAutomatEvents geldAusgabeAutomatEvents = new GeldAusgabeAutomatEventsImpl(geldAusgabeAutomatRepo);
 
-		BaseCommandParser commandParser = new BaseCommandParser(kundeEvents, bankEvents, kontoEvents, transaktionEvents, automatEvents);
+		BaseCommandParser commandParser = new BaseCommandParser(kundeEvents, bankEvents, giroKontoEvents,
+				transaktionEvents, geldAusgabeAutomatEvents);
 
 		TerminalHandler terminalHandler = new TerminalHandler(commandParser);
 		terminalHandler.start();

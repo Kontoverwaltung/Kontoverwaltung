@@ -33,9 +33,13 @@ public class BankEventsImpl implements BankEvents {
 
 	@Override
 	public CommandResult deleteBank(String bankName) {
-		BankReturn bankReturn = bankRepo.removeBankByName(bankName);
-		if (bankReturn.isSuccessful()) {
-			return CommandResult.success("bank deleted");
+		BankReturn bankToRemove = bankRepo.getBankByName(bankName);
+		if (bankToRemove.isSuccessful()) {
+			BankReturn bankReturn = bankRepo.removeBank(bankToRemove.getInstance());
+			if (bankReturn.isSuccessful()) {
+				return CommandResult.success("bank deleted");
+			}
+
 		}
 		return CommandResult.error("failed to delete bank");
 	}

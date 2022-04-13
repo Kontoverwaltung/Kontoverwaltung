@@ -7,11 +7,11 @@ import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class TransferCommand extends CommandParser {
+public class TransaktionCommand extends CommandParser {
 
 	private TransaktionEvents transaktionEvents;
 
-	public TransferCommand(TransaktionEvents transaktionEvents) {
+	public TransaktionCommand(TransaktionEvents transaktionEvents) {
 		super();
 		this.transaktionEvents = transaktionEvents;
 	}

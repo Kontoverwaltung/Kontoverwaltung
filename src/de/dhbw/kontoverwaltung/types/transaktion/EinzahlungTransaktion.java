@@ -1,35 +1,33 @@
 package de.dhbw.kontoverwaltung.types.transaktion;
 
-import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
 import de.dhbw.kontoverwaltung.types.EuroCentBetrag;
+import de.dhbw.kontoverwaltung.types.GeldAusgabeAutomat;
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 
 public class EinzahlungTransaktion extends Transaktion {
 
-	private GeldAusgabeAutomat automat;
-	private GiroKonto konto;
+	private GeldAusgabeAutomat geldAusgabeAutomat;
+	private GiroKonto giroKonto;
 
-	public EinzahlungTransaktion(GeldAusgabeAutomat automat, GiroKonto konto, EuroCentBetrag betrag) {
+	public EinzahlungTransaktion(GeldAusgabeAutomat geldAusgabeAutomat, GiroKonto giroKonto, EuroCentBetrag betrag) {
 		super();
-		this.automat = automat;
-		this.konto = konto;
+		this.geldAusgabeAutomat = geldAusgabeAutomat;
+		this.giroKonto = giroKonto;
 		this.betrag = betrag;
 	}
 
-	public GeldAusgabeAutomat getAutomat() {
-		return automat;
+	public GeldAusgabeAutomat getGeldAusgabeAutomat() {
+		return geldAusgabeAutomat;
 	}
 
-	public GiroKonto getKonto() {
-		return konto;
+	public GiroKonto getGiroKonto() {
+		return giroKonto;
 	}
 
 	@Override
 	public String toString() {
-		return "EinzahlungTransaktion [Automat=" + automat + ", KontoID=" + konto.getKontoId() + ", TransaktionID=" + transaktionId
-				+ ", Betrag=" + betrag + "]";
+		return "EinzahlungTransaktion [GeldAusgabeAutomat=" + geldAusgabeAutomat + ", GiroKontoID="
+				+ giroKonto.getKontoId() + ", TransaktionID=" + transaktionId + ", Betrag=" + betrag + "]";
 	}
 
-
-	
 }

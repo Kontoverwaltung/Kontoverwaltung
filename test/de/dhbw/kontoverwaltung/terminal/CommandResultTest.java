@@ -15,9 +15,9 @@ class CommandResultTest {
 
 	private static final String TEST_OK = "test ok";
 	private static final String TEST_ERROR = "test error";
-	
+
 	private static final String ERROR_INCOMPLETE_COMMAND = "ERROR: incomplete command: ";
-	
+
 	private CommandResult targetError = CommandResult.error(TEST_ERROR);
 	private CommandResult targetOk = CommandResult.success(TEST_OK);
 

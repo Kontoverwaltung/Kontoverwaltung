@@ -2,11 +2,11 @@ package de.dhbw.kontoverwaltung.repositories.returns;
 
 import de.dhbw.kontoverwaltung.types.GiroKonto;
 
-public class KontoReturn extends Return {
+public class GiroKontoReturn extends Return {
 
 	private GiroKonto instance;
 
-	public KontoReturn(boolean successful, GiroKonto instance) {
+	public GiroKontoReturn(boolean successful, GiroKonto instance) {
 		super(successful);
 		this.instance = instance;
 	}

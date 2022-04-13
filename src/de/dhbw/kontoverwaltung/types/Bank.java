@@ -19,5 +19,5 @@ public class Bank implements Serializable {
 	public String toString() {
 		return "Bank [Name=" + name + "]";
 	}
-	
+
 }

@@ -49,7 +49,7 @@ public class EuroCentBetrag implements Serializable {
 		int cent = sum % 100;
 		return new EuroCentBetrag(cent, euro);
 	}
-	
+
 	public EuroCentBetrag subtract(EuroCentBetrag sub) {
 		int sum = getSum();
 		sum -= sub.getSum();

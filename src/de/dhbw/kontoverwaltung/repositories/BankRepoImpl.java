@@ -9,6 +9,7 @@ public class BankRepoImpl implements BankRepo {
 
 	private PersistentDatabase<Bank> bankDatabase = new PersistentDatabase<>(new FileHandlerImpl("bank.csv"));
 
+	@Override
 	public BankReturn getBankByName(String bankName) {
 		Bank bank = bankDatabase.get(bankName);
 		if (bank != null) {
@@ -17,18 +18,16 @@ public class BankRepoImpl implements BankRepo {
 		return new BankReturn(false, null);
 	}
 
+	@Override
 	public BankReturn addBank(String bankName) {
 		Bank neueBank = new Bank(bankName);
 		bankDatabase.set(neueBank.getName(), neueBank);
 		return new BankReturn(true, neueBank);
 	}
 
-	public BankReturn removeBankByName(String bankName) {
-		Bank bank = bankDatabase.get(bankName);
-		if (bank != null) {
-			bankDatabase.remove(bankName);
-			return new BankReturn(true, bank);
-		}
-		return new BankReturn(false, null);
+	@Override
+	public BankReturn removeBank(Bank bank) {
+		bankDatabase.remove(bank.getName());
+		return new BankReturn(true, bank);
 	}
 }

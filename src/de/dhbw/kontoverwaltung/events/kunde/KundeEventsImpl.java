@@ -34,11 +34,15 @@ public class KundeEventsImpl implements KundeEvents {
 	}
 
 	public CommandResult deleteKunde(String kundenId) {
-		KundeReturn answer = kundeRepo.removeKundeById(kundenId);
-		if (answer.isSuccessful()) {
-			return CommandResult.success("deleted " + answer.getInstance().getKundenId());
+		KundeReturn kundeToRemove = kundeRepo.getKundeById(kundenId);
+		if (kundeToRemove.isSuccessful()) {
+			KundeReturn kundeReturn = kundeRepo.removeKunde(kundeToRemove.getInstance());
+			if (kundeReturn.isSuccessful()) {
+				return CommandResult.success("kunde deleted");
+			}
+
 		}
-		return CommandResult.error("kunde not deleted");
+		return CommandResult.error("failed to delete kunde");
 	}
 
 }

@@ -1,6 +1,7 @@
 package de.dhbw.kontoverwaltung.repositories;
 
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
+import de.dhbw.kontoverwaltung.types.Person;
 
 public interface KundeRepo {
 
@@ -8,6 +9,6 @@ public interface KundeRepo {
 
 	public KundeReturn addKunde(String vorname, String nachname);
 
-	public KundeReturn removeKundeById(String kundenId);
+	public KundeReturn removeKunde(Person kunde);
 
 }
