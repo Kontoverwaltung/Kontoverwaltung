@@ -9,6 +9,10 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public class GetKundeCommand extends CommandParser {
 
+	private static final int COMMAND_HELP_CUT = 2;
+	private static final int ARG_KUNDE = 2;
+	private static final int EXPECTED_LENGTH = 3;
+	
 	private KundeEvents kundeEvents;
 
 	public GetKundeCommand(KundeEvents kundeEvents) {
@@ -18,10 +22,10 @@ public class GetKundeCommand extends CommandParser {
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 3) {
-			String kundenId = command.getStringAt(2);
+		if (command.argsSize() == EXPECTED_LENGTH) {
+			String kundenId = command.getStringAt(ARG_KUNDE);
 			return kundeEvents.getKunde(kundenId);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("kundenid"));
+		return CommandResult.usage(command.getCommandUpToPos(COMMAND_HELP_CUT), Arrays.asList("kundenid"));
 	}
 }

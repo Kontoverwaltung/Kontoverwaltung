@@ -9,6 +9,10 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public class DeleteBankCommand extends CommandParser {
 
+	private static final int COMMAND_HELP_CUT = 2;
+	private static final int ARG_BANK = 2;
+	private static final int EXPECTED_LENGTH = 3;
+	
 	private BankEvents bankEvents;
 
 	public DeleteBankCommand(BankEvents bankEvents) {
@@ -18,11 +22,11 @@ public class DeleteBankCommand extends CommandParser {
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 3) {
-			String bankName = command.getStringAt(2);
+		if (command.argsSize() == EXPECTED_LENGTH) {
+			String bankName = command.getStringAt(ARG_BANK);
 			return bankEvents.deleteBank(bankName);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("bankname"));
+		return CommandResult.usage(command.getCommandUpToPos(COMMAND_HELP_CUT), Arrays.asList("bankname"));
 	}
 
 }

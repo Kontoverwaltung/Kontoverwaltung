@@ -9,6 +9,13 @@ import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
 public class CashOutCommand extends CommandParser {
 
+	private static final int COMMAND_HELP_CUT = 2;
+	private static final int ARG_AUTOMAT = 2;
+	private static final int ARG_KONTO = 3;
+	private static final int ARG_BETRAG = 4;
+	private static final int ARG_PIN = 5;
+	private static final int EXPECTED_LENGTH = 6;
+
 	private TransaktionEvents transaktionEvents;
 
 	public CashOutCommand(TransaktionEvents transaktionEvents) {
@@ -18,13 +25,13 @@ public class CashOutCommand extends CommandParser {
 
 	@Override
 	public CommandResult execute(SplittedCommand command) {
-		if (command.argsSize() == 6) {
-			String automat = command.getStringAt(2);
-			String konto = command.getStringAt(3);
-			String betrag = command.getStringAt(4);
-			String pin = command.getStringAt(5);
+		if (command.argsSize() == EXPECTED_LENGTH) {
+			String automat = command.getStringAt(ARG_AUTOMAT);
+			String konto = command.getStringAt(ARG_KONTO);
+			String betrag = command.getStringAt(ARG_BETRAG);
+			String pin = command.getStringAt(ARG_PIN);
 			return transaktionEvents.cashOut(automat, konto, betrag, pin);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(2), Arrays.asList("automat", "konto", "betrag", "pin"));
+		return CommandResult.usage(command.getCommandUpToPos(COMMAND_HELP_CUT), Arrays.asList("automat", "konto", "betrag", "pin"));
 	}
 }
