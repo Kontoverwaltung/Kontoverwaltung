@@ -23,8 +23,20 @@ import de.dhbw.kontoverwaltung.terminal.command.BaseCommandParser;
 
 public class KontoverwaltungApp {
 
+	private static KontoverwaltungApp instance = null;
+
+	private KontoverwaltungApp() {
+	}
+
+	public static KontoverwaltungApp getInstance() {
+		if (instance == null) {
+			instance = new KontoverwaltungApp();
+		}
+		return instance;
+	}
+
 	public static void main(String[] args) {
-		KontoverwaltungApp app = new KontoverwaltungApp();
+		KontoverwaltungApp app = KontoverwaltungApp.getInstance();
 		app.start();
 	}
 
@@ -40,8 +52,7 @@ public class KontoverwaltungApp {
 		GiroKontoEvents giroKontoEvents = new GiroKontoEventsImpl(giroKontoRepo, bankRepo, kundeRepo);
 		GeldAusgabeAutomatEvents geldAusgabeAutomatEvents = new GeldAusgabeAutomatEventsImpl(geldAusgabeAutomatRepo);
 
-		BaseCommandParser commandParser = new BaseCommandParser(kundeEvents, bankEvents, giroKontoEvents,
-				transaktionEvents, geldAusgabeAutomatEvents);
+		BaseCommandParser commandParser = new BaseCommandParser(kundeEvents, bankEvents, giroKontoEvents, transaktionEvents, geldAusgabeAutomatEvents);
 
 		TerminalHandler terminalHandler = new TerminalHandler(commandParser);
 		terminalHandler.start();
