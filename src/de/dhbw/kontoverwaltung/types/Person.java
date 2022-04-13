@@ -11,12 +11,6 @@ public class Person implements Serializable {
 
 	private String kundenId;
 
-	public Person(String vorname, String nachname) {
-		this.vorname = vorname;
-		this.nachname = nachname;
-		this.kundenId = UniqueIdGenerator.next();
-	}
-
 	public String getKundenId() {
 		return kundenId;
 	}
@@ -32,6 +26,47 @@ public class Person implements Serializable {
 	@Override
 	public String toString() {
 		return "Kunde [KundenID=" + kundenId + "]";
+	}
+
+	public static class PersonBuilder {
+
+		private String vorname;
+		private String nachname;
+		private String kundenId;
+
+		public PersonBuilder vorname(String vorname) {
+			this.vorname = vorname;
+			return PersonBuilder.this;
+		}
+
+		public PersonBuilder nachname(String nachname) {
+			this.nachname = nachname;
+			return PersonBuilder.this;
+		}
+
+		public PersonBuilder kundenId(String kundenId) {
+			this.kundenId = kundenId;
+			return PersonBuilder.this;
+		}
+
+		public Person build() {
+			if (this.vorname == null) {
+				throw new NullPointerException();
+			}
+			if (this.nachname == null) {
+				throw new NullPointerException();
+			}
+			if (this.kundenId == null) {
+				this.kundenId = UniqueIdGenerator.next();
+			}
+			return new Person(this);
+		}
+	}
+
+	private Person(PersonBuilder builder) {
+		this.vorname = builder.vorname;
+		this.nachname = builder.nachname;
+		this.kundenId = builder.kundenId;
 	}
 
 }

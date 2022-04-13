@@ -4,6 +4,7 @@ import de.dhbw.kontoverwaltung.database.FileHandlerImpl;
 import de.dhbw.kontoverwaltung.database.PersistentDatabase;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
 import de.dhbw.kontoverwaltung.types.Person;
+import de.dhbw.kontoverwaltung.types.Person.PersonBuilder;
 
 public class KundeRepoImpl implements KundeRepo {
 
@@ -20,7 +21,7 @@ public class KundeRepoImpl implements KundeRepo {
 
 	@Override
 	public KundeReturn addKunde(String vorname, String nachname) {
-		Person neuerKunde = new Person(vorname, nachname);
+		Person neuerKunde = new PersonBuilder().vorname(vorname).nachname(nachname).build();
 		kundeDatabase.set(neuerKunde.getKundenId(), neuerKunde);
 		return new KundeReturn(true, neuerKunde);
 	}
