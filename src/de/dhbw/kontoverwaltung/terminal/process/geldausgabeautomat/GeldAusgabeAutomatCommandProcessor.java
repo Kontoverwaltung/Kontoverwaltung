@@ -9,9 +9,9 @@ public class GeldAusgabeAutomatCommandProcessor extends UppercaseCommandParser {
 
 	public GeldAusgabeAutomatCommandProcessor(GeldAusgabeAutomatEvents ausgabeAutomatEvents) {
 		super(HIERARCHY_LEVEL);
-		commands.put("GET", new GetAutomatCommand(ausgabeAutomatEvents));
-		commands.put("CREATE", new CreateAutomatCommand(ausgabeAutomatEvents));
-		commands.put("DELETE", new DeleteAutomatCommand(ausgabeAutomatEvents));
+		commands.put("GET", new GetGeldAusgabeAutomatCommand(ausgabeAutomatEvents));
+		commands.put("CREATE", new CreateGeldAusgabeAutomatCommand(ausgabeAutomatEvents));
+		commands.put("DELETE", new DeleteGeldAusgabeAutomatCommand(ausgabeAutomatEvents));
 	}
 
 }

@@ -7,7 +7,7 @@ import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class CreateKontoCommand extends CommandParser {
+public class CreateGiroKontoCommand extends CommandParser {
 
 	private static final int COMMAND_HELP_CUT = 2;
 	private static final int ARG_BANK = 2;
@@ -17,7 +17,7 @@ public class CreateKontoCommand extends CommandParser {
 
 	private GiroKontoEvents giroKontoEvents;
 
-	public CreateKontoCommand(GiroKontoEvents giroKontoEvents) {
+	public CreateGiroKontoCommand(GiroKontoEvents giroKontoEvents) {
 		super();
 		this.giroKontoEvents = giroKontoEvents;
 	}

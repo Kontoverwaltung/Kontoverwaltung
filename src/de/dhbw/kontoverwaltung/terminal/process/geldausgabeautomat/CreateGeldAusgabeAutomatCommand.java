@@ -7,7 +7,7 @@ import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class CreateAutomatCommand extends CommandParser {
+public class CreateGeldAusgabeAutomatCommand extends CommandParser {
 
 	private static final int COMMAND_HELP_CUT = 2;
 	private static final int ARG_AUTOMAT = 2;
@@ -16,7 +16,7 @@ public class CreateAutomatCommand extends CommandParser {
 
 	private GeldAusgabeAutomatEvents ausgabeAutomatEvents;
 
-	public CreateAutomatCommand(GeldAusgabeAutomatEvents ausgabeAutomatEvents) {
+	public CreateGeldAusgabeAutomatCommand(GeldAusgabeAutomatEvents ausgabeAutomatEvents) {
 		super();
 		this.ausgabeAutomatEvents = ausgabeAutomatEvents;
 	}

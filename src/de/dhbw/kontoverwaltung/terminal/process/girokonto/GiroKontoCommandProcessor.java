@@ -9,12 +9,12 @@ public class GiroKontoCommandProcessor extends UppercaseCommandParser {
 	
 	public GiroKontoCommandProcessor(GiroKontoEvents kontoEvents) {
 		super(HIERARCHY_LEVEL);
-		commands.put("GET", new GetKontoCommand(kontoEvents));
-		commands.put("CREATE", new CreateKontoCommand(kontoEvents));
-		commands.put("DELETE", new DeleteKontoCommand(kontoEvents));
-		commands.put("CHANGEPIN", new ChangePinKontoCommand(kontoEvents));
-		commands.put("CHANGEBANK", new ChangeBankKontoCommand(kontoEvents));
-		commands.put("GETHISTORY", new GetHistoryKontoCommand(kontoEvents));
+		commands.put("GET", new GetGiroKontoCommand(kontoEvents));
+		commands.put("CREATE", new CreateGiroKontoCommand(kontoEvents));
+		commands.put("DELETE", new DeleteGiroKontoCommand(kontoEvents));
+		commands.put("CHANGEPIN", new ChangePinGiroKontoCommand(kontoEvents));
+		commands.put("CHANGEBANK", new ChangeBankGiroKontoCommand(kontoEvents));
+		commands.put("GETHISTORY", new GetHistoryGiroKontoCommand(kontoEvents));
 	}
 
 }

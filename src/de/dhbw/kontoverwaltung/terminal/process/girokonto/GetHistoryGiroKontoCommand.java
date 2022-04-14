@@ -7,16 +7,15 @@ import de.dhbw.kontoverwaltung.terminal.SplittedCommand;
 import de.dhbw.kontoverwaltung.terminal.command.CommandParser;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 
-public class ChangeBankKontoCommand extends CommandParser {
+public class GetHistoryGiroKontoCommand extends CommandParser {
 
 	private static final int COMMAND_HELP_CUT = 2;
-	private static final int ARG_KONTO_ID = 2;
-	private static final int ARG_BANK = 3;
-	private static final int EXPECTED_LENGTH = 4;
-
+	private static final int ARG_KONTO = 2;
+	private static final int EXPECTED_LENGTH = 3;
+	
 	private GiroKontoEvents giroKontoEvents;
 
-	public ChangeBankKontoCommand(GiroKontoEvents giroKontoEvents) {
+	public GetHistoryGiroKontoCommand(GiroKontoEvents giroKontoEvents) {
 		super();
 		this.giroKontoEvents = giroKontoEvents;
 	}
@@ -24,10 +23,9 @@ public class ChangeBankKontoCommand extends CommandParser {
 	@Override
 	public CommandResult execute(SplittedCommand command) {
 		if (command.argsSize() == EXPECTED_LENGTH) {
-			String kontoId = command.getStringAt(ARG_KONTO_ID);
-			String newBank = command.getStringAt(ARG_BANK);
-			return giroKontoEvents.changeBank(kontoId, newBank);
+			String kontoId = command.getStringAt(ARG_KONTO);
+			return giroKontoEvents.getKontoauszug(kontoId);
 		}
-		return CommandResult.usage(command.getCommandUpToPos(COMMAND_HELP_CUT), Arrays.asList("old-kontoid", "new-bank"));
+		return CommandResult.usage(command.getCommandUpToPos(COMMAND_HELP_CUT), Arrays.asList("kontoid"));
 	}
 }
