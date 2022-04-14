@@ -72,6 +72,9 @@ public class GiroKonto implements Serializable {
 	}
 
 	public boolean hatMehrGeldAls(EuroCentBetrag betragCheck) {
+		if (betrag.getEuro() > betragCheck.getEuro()) {
+			return true;
+		}
 		if (betrag.getEuro() < betragCheck.getEuro()) {
 			return false;
 		}

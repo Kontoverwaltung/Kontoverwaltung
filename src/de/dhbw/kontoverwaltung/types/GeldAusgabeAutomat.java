@@ -29,6 +29,9 @@ public class GeldAusgabeAutomat implements Serializable {
 		if (betrag.getEuro() < betragCheck.getEuro()) {
 			return false;
 		}
+		if (betrag.getEuro() < betragCheck.getEuro()) {
+			return false;
+		}
 		if (betrag.getCent() < betragCheck.getCent()) {
 			return false;
 		}
