@@ -189,9 +189,17 @@ class GiroKontoEventsImplTest {
 		assertThat(result.isSuccessful(), is(true));
 		assertThat(result.getAdditionalInfo(), is("pin changed"));
 	}
-
+	
 	@Test
 	@Order(5)
+	void testHistoryIsEmpty() {
+		CommandResult result = target.getKontoauszug(kontoId);
+		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is(""));
+	}
+
+	@Test
+	@Order(6)
 	void testAutGiroKontoDelete() {
 		CommandResult result = target.deleteGiroKonto(kontoId);
 		assertThat(result.isSuccessful(), is(true));
@@ -199,7 +207,7 @@ class GiroKontoEventsImplTest {
 	}
 
 	@Test
-	@Order(6)
+	@Order(7)
 	void testGiroKontoNotFound2() {
 		giroKontoNotFound();
 	}
