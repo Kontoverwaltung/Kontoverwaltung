@@ -22,8 +22,8 @@ class BankEventsImplTest {
 
 	private BankEventsImpl target = new BankEventsImpl(new BankRepo() {
 		@Override
-		public BankReturn removeBank(Bank bank) {
-			assertThat(bank.getName(), is(BANK_NAME));
+		public BankReturn removeBank(Bank bankRequest) {
+			assertThat(bankRequest.getName(), is(BANK_NAME));
 			bank = null;
 			return new BankReturn(true, bank);
 		}

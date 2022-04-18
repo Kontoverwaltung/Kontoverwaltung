@@ -25,20 +25,21 @@ class KundeEventsImplTest {
 	private static final String VORNAME = "Max";
 	private static final String NACHNAME = "Muster";
 	private static Person kunde = null;
+	private static String kundenId;
 
 	
 	private KundeEventsImpl target = new KundeEventsImpl(new KundeRepo() {
 		
 		@Override
-		public KundeReturn removeKunde(Person kunde) {
-			assertThat(kunde.getKundenId(), is(kunde.getKundenId()));
+		public KundeReturn removeKunde(Person kundeRequest) {
+			assertThat(kundeRequest.getKundenId(), is(kundenId));
 			kunde = null;
 			return new KundeReturn(true, kunde);
 		}
 		
 		@Override
 		public KundeReturn getKundeById(String kundenId) {
-			if(kunde != null && kundenId.equals(kunde.getKundenId())) {
+			if(kunde != null && kundenId.equals(kundenId)) {
 				return new KundeReturn(true, kunde);
 			}
 			return new KundeReturn(false, null);
@@ -49,6 +50,7 @@ class KundeEventsImplTest {
 			assertThat(vorname, is(VORNAME));
 			assertThat(nachname, is(NACHNAME));
 			kunde = new PersonBuilder().vorname(vorname).nachname(nachname).build();
+			kundenId = kunde.getKundenId();
 			return new KundeReturn(true, kunde);
 		}
 	});
@@ -58,21 +60,21 @@ class KundeEventsImplTest {
 	void testCreateKunde() {
 		CommandResult result = target.createNewKunde(VORNAME, NACHNAME);
 		assertThat(result.isSuccessful(), is(true));
-		assertThat(result.getAdditionalInfo(), is("kunde " + kunde.getKundenId() + " created"));
+		assertThat(result.getAdditionalInfo(), is("kunde " + kundenId + " created"));
 	}
 
 	@Test
 	@Order(2)
 	void testKundeFound() {
-		CommandResult result = target.getKunde(kunde.getKundenId());
+		CommandResult result = target.getKunde(kundenId);
 		assertThat(result.isSuccessful(), is(true));
-		assertThat(result.getAdditionalInfo(), is("Kunde [KundenID=" + kunde.getKundenId() + "]"));
+		assertThat(result.getAdditionalInfo(), is("Kunde [KundenID=" + kundenId + "]"));
 	}
 
 	@Test
 	@Order(3)
 	void testKundeDelete() {
-		CommandResult result = target.deleteKunde(kunde.getKundenId());
+		CommandResult result = target.deleteKunde(kundenId);
 		assertThat(result.isSuccessful(), is(true));
 		assertThat(result.getAdditionalInfo(), is("kunde deleted"));
 	}
@@ -84,7 +86,7 @@ class KundeEventsImplTest {
 	}
 
 	private void kundeNotFound() {
-		CommandResult result = target.getKunde(kunde.getKundenId());
+		CommandResult result = target.getKunde(kundenId);
 		assertThat(result.isSuccessful(), is(false));
 		assertThat(result.getAdditionalInfo(), is("kunde not found"));
 	}

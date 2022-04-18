@@ -37,8 +37,8 @@ class GeldAusgabeAutomatEventsImplTest {
 		@Override
 		public GeldAusgabeAutomatReturn removeGeldAusgabeAutomat(GeldAusgabeAutomat geldAusgabeAutomat) {
 			assertThat(geldAusgabeAutomat.getAutomatId(), is(AUTOMAT_ID));
-			geldAusgabeAutomat = null;
-			return new GeldAusgabeAutomatReturn(true, geldAusgabeAutomat);
+			automat = null;
+			return new GeldAusgabeAutomatReturn(true, automat);
 		}
 		
 		@Override

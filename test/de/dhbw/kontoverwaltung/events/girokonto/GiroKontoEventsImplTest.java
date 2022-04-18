@@ -2,8 +2,13 @@ package de.dhbw.kontoverwaltung.events.girokonto;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -27,55 +32,75 @@ import de.dhbw.kontoverwaltung.types.transaktion.Transaktion;
 @TestMethodOrder(OrderAnnotation.class)
 class GiroKontoEventsImplTest {
 
+	private static final Pin PIN = new Pin("1234");
+	private static final String PIN_STRING = "1234";
+	private static final String PIN_STRING_NEW = "1235";
+	private static String kontoId;
 	private static GiroKonto konto = null;
+	
+	private static final String BANK_NAME = "testbank";
+	private static Bank bank = new Bank("testbank");
+	
+	private static final String VORNAME = "Max";
+	private static final String NACHNAME = "Muster";
+	private static Person kunde = new Person.PersonBuilder().vorname("Max").nachname("Muster").build();
 	
 	private GiroKontoRepo giroKontoRepo = new GiroKontoRepo() {
 		
 		@Override
 		public GiroKontoReturn updatePin(GiroKonto giroKonto, Pin newPin) {
-			// TODO Auto-generated method stub
-			return null;
+			assertThat(giroKonto, is(konto));
+			konto.setPin(newPin);
+			return new GiroKontoReturn(true, konto);
 		}
 		
 		@Override
 		public GiroKontoReturn updateBetrag(GiroKonto giroKonto, EuroCentBetrag betrag) {
-			// TODO Auto-generated method stub
-			return null;
+			assertThat(giroKonto, is(konto));
+			konto.setBetrag(betrag);
+			return new GiroKontoReturn(true, konto);
 		}
 		
 		@Override
 		public GiroKontoReturn updateBank(GiroKonto giroKonto, Bank newBank) {
-			// TODO Auto-generated method stub
-			return null;
+			assertThat(giroKonto, is(konto));
+			konto.setBank(newBank);
+			return new GiroKontoReturn(true, konto);
 		}
 		
 		@Override
 		public GiroKontoReturn removeGiroKonto(GiroKonto giroKonto) {
-			// TODO Auto-generated method stub
-			return null;
+			assertThat(giroKonto.getKontoId(), is(konto.getKontoId()));
+			konto = null;
+			return new GiroKontoReturn(true, konto);
 		}
 		
 		@Override
 		public GiroKontoReturn getGiroKontoById(String giroKontoId) {
-			// TODO Auto-generated method stub
-			return null;
+			if (konto != null && giroKontoId.equals(konto.getKontoId())) {
+				return new GiroKontoReturn(true, konto);
+			} else {
+				return new GiroKontoReturn(false, null);
+			}
 		}
 		
 		@Override
 		public GiroKontoReturn addHistoryEntry(GiroKonto giroKonto, Transaktion transaktion) {
-			// TODO Auto-generated method stub
-			return null;
+			assertThat(giroKonto, is(konto));
+			konto.addHistoryEntry(transaktion);
+			return new GiroKontoReturn(true, konto);
 		}
 		
 		@Override
-		public GiroKontoReturn addGiroKonto(Bank bank, Person inhaber, Pin pin) {
-			// TODO Auto-generated method stub
-			return null;
+		public GiroKontoReturn addGiroKonto(Bank bankRequest, Person inhaber, Pin pinRequest) {
+			assertThat(bankRequest, is(bank));
+			assertThat(inhaber, is(kunde));
+			assertTrue(pinRequest.isCorrectPin(PIN_STRING));
+			konto = new GiroKonto(bank, inhaber, PIN);
+			return new GiroKontoReturn(true, konto);
 		}
 	};
 	
-	private static final String BANK_NAME = "testbank";
-	private static Bank bank = null;
 	
 	private BankRepo bankRepo = new BankRepo() {
 		
@@ -103,9 +128,6 @@ class GiroKontoEventsImplTest {
 		}
 	};
 	
-	private static final String VORNAME = "Max";
-	private static final String NACHNAME = "Muster";
-	private static Person kunde = null;
 	
 	private KundeRepo kundeRepo = new KundeRepo() {
 		
@@ -135,4 +157,57 @@ class GiroKontoEventsImplTest {
 	
 	private GiroKontoEventsImpl target = new GiroKontoEventsImpl(giroKontoRepo, bankRepo, kundeRepo);
 
+	@Test
+	@Order(1)
+	void testCreateGiroKonto() {
+		CommandResult result = target.createNewGiroKonto(BANK_NAME, kunde.getKundenId(), PIN_STRING);
+		kontoId = konto.getKontoId();
+		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is("girokonto " + kontoId + " created"));
+	}
+
+	@Test
+	@Order(2)
+	void testGiroKontoFound() {
+		CommandResult result = target.getGiroKonto(kontoId);
+		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is("Konto [Bank=Bank [Name=testbank], KontoID=" + kontoId + ", Inhaber=Kunde [KundenID=" +kunde.getKundenId()+ "], Pin=Pin [Pin=????], Betrag=Betrag [0,0], Kontoauszug=]"));
+	}
+	
+	@Test
+	@Order(3)
+	void testChangeBank() {
+		CommandResult result = target.changeBank(kontoId, BANK_NAME);
+		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is("bank changed"));
+	}
+	
+	@Test
+	@Order(4)
+	void testChangePin() {
+		CommandResult result = target.changePin(kontoId, PIN_STRING, PIN_STRING_NEW);
+		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is("pin changed"));
+	}
+
+	@Test
+	@Order(5)
+	void testAutGiroKontoDelete() {
+		CommandResult result = target.deleteGiroKonto(kontoId);
+		assertThat(result.isSuccessful(), is(true));
+		assertThat(result.getAdditionalInfo(), is("girokonto deleted"));
+	}
+
+	@Test
+	@Order(6)
+	void testGiroKontoNotFound2() {
+		giroKontoNotFound();
+	}
+
+	private void giroKontoNotFound() {
+		CommandResult result = target.getGiroKonto(kontoId);
+		assertThat(result.isSuccessful(), is(false));
+		assertThat(result.getAdditionalInfo(), is("failed to load girokonto"));
+	}
+	
 }
