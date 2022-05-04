@@ -40,7 +40,7 @@ public class GeldAusgabeAutomat implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Automat [AutomatID=" + automatId + "]";
+		return "Automat [AutomatID=" + automatId + ", Betrag=" + betrag + "]";
 	}
 
 }

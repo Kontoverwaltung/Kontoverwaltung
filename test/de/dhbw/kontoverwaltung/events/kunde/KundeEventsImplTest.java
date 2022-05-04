@@ -1,23 +1,18 @@
 package de.dhbw.kontoverwaltung.events.kunde;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import de.dhbw.kontoverwaltung.repositories.KundeRepo;
 import de.dhbw.kontoverwaltung.repositories.returns.KundeReturn;
 import de.dhbw.kontoverwaltung.terminal.command.results.CommandResult;
 import de.dhbw.kontoverwaltung.types.Person;
 import de.dhbw.kontoverwaltung.types.Person.PersonBuilder;
-
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.Test;
 
 @TestMethodOrder(OrderAnnotation.class)
 class KundeEventsImplTest {
